@@ -97,3 +97,48 @@ nav a {
     margin-left: 30px;
 }
 
+.conteudo-principal {
+    margin-top: 71px; 
+    display: flex;
+    justify-content: center;
+}
+
+.carrossel-container {
+    width: 100%;
+    max-width: 400px; 
+    overflow: hidden;
+    height: 40px;
+}
+
+.carrossel-track {
+    display: flex;
+    width: fit-content; 
+    animation: carrosselinft 10s linear infinite;
+}
+
+.slide-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: center;
+    flex: 0 0 calc(400px / 3); 
+    height: 60px;
+    background-color: var(--cor-primaria-clara);
+    border: 2px solid var(--cor-fundo); 
+    color: white;
+    font-weight: bold;
+}
+
+@keyframes carrosselinft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100px * 4));
+    }
+}
+
+.carrossel-track:hover {
+    animation-play-state: paused;
+}
