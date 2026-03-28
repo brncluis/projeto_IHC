@@ -1,343 +1,436 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>ConectaVida</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
 
-<!-- ══ OVERLAY CARREGANDO ══ -->
-<div class="overlay-loading" id="overlay-loading">
-    <div class="spinner"></div>
-    <div class="loading-texto" id="loading-texto">Carregando...</div>
-</div>
+    <div class="tela-carregando" id="tela-carregando">
+        <div class="icone-girando"></div>
 
-<!-- ══ TOAST ══ -->
-<div class="toast" id="toast"></div>
+        <div class="texto-carregando" id="texto-carregando">Carregando...</div>
 
-<!-- ══ MODAL ESQUECI SENHA ══ -->
-<div class="modal-overlay" id="modal-senha">
-    <div class="modal">
-        <div class="modal-titulo">🔑 Esqueceu a senha?</div>
-        <div class="modal-texto">
-            Entre em contato com um familiar ou responsável para recuperar o acesso à sua conta.
-            <br><br>
-            Você também pode ligar para nossa central: <strong>(81) 3000-0000</strong>
-        </div>
-        <div class="modal-acoes">
-            <button class="btn-modal-cancelar" onclick="fecharModal()">Fechar</button>
-            <button class="btn-modal-ok" onclick="fecharModal(); mostrarToast('✅ Ajuda enviada ao familiar!','sucesso')">Avisar Familiar</button>
-        </div>
     </div>
-</div>
 
-<!-- ══ TOPO ══ -->
-<header class="topo" id="topo" style="display:none;">
-    <span class="topo-logo">🌿</span>
-    <span class="topo-titulo" id="topo-titulo">ConectaVida</span>
-    <input class="barra-pesquisa" id="barra-pesquisa" type="text" placeholder="🔍 Pesquisar...">
-</header>
+    <div class="notificacao" id="notificacao"></div>
 
-<!-- ════════════════════════
-     TELA 1: LOGIN
-════════════════════════ -->
-<div class="pagina ativa" id="pg-login" style="margin-top:0;">
-    <div class="login-logo">🌿</div>
-    <div class="login-marca">ConectaVida</div>
-    <div class="login-sub">Conectando pessoas com carinho ✨</div>
+    <div class="fundo-modal" id="modal-senha">
+        <div class="caixa-modal">
+            <div class="modal-titulo">🔑 Esqueceu a senha?</div>
 
-    <div class="login-form">
+            <div class="modal-texto">
 
-        <div class="alerta-erro" id="alerta-login">
-            ⚠️ Usuário ou senha incorretos. Verifique os dados e tente novamente.
-            <br>
-            <button class="btn-recuperar" onclick="document.getElementById('modal-senha').classList.add('aberto')">
-                🔑 Esqueci minha senha
-            </button>
-        </div>
+                Entre em contato com um familiar ou responsável para recuperar o acesso à sua conta.
+                <br><br>
+                Você também pode ligar para nossa central: <strong>(81) 3000-0000</strong>
 
-        <div>
-            <label class="campo-label" for="input-usuario">👤 Usuário</label>
-            <input class="campo-input" id="input-usuario" type="text" placeholder="Digite seu nome de usuário" autocomplete="username">
-            <div class="msg-erro-campo" id="erro-usuario">⚠️ Por favor, preencha o usuário.</div>
-        </div>
+            </div>
+            <div class="modal-botoes">
 
-        <div>
-            <label class="campo-label" for="input-senha">🔒 Senha</label>
-            <input class="campo-input" id="input-senha" type="password" placeholder="Digite sua senha" autocomplete="current-password">
-            <div class="msg-erro-campo" id="erro-senha">⚠️ Por favor, preencha a senha.</div>
-        </div>
+                <button class="botao-fechar-modal" onclick="fecharModal()">Fechar</button>
 
-        <button class="btn-principal" id="btn-entrar" onclick="tentarLogin()">Entrar</button>
-
-        <div class="login-esqueci" onclick="document.getElementById('modal-senha').classList.add('aberto')">
-            Esqueci minha senha
-        </div>
-
-        <div style="font-size:0.88rem;font-weight:700;color:var(--texto-suave);text-align:center;margin-top:4px;">
-            💡 Dica: use <strong>admin</strong> / <strong>1234</strong> para entrar
-        </div>
-    </div>
-</div>
-
-<!-- ════════════════════════
-     TELA 2: INÍCIO
-════════════════════════ -->
-<div class="pagina" id="pg-inicio">
-    <div class="carrossel-wrap">
-        <div class="carrossel-track" id="track">
-            <div class="cat-item"><span class="cat-icone">📰</span> Tudo</div>
-            <div class="cat-item"><span class="cat-icone">🌱</span> Saúde</div>
-            <div class="cat-item"><span class="cat-icone">🎉</span> Eventos</div>
-            <div class="cat-item"><span class="cat-icone">📚</span> Dicas</div>
-            <div class="cat-item"><span class="cat-icone">🍎</span> Alimentação</div>
-            <div class="cat-item"><span class="cat-icone">🏡</span> Casa</div>
-            <div class="cat-item"><span class="cat-icone">💊</span> Remédios</div>
-            <div class="cat-item"><span class="cat-icone">🤝</span> Comunidade</div>
+                <button class="botao-confirmar-modal" onclick="fecharModal(); exibirNotificacao('✅ Ajuda enviada ao familiar!', 'sucesso')">Avisar Familiar</button>
+            </div>
         </div>
     </div>
 
-    <button class="btn-nova-pub" onclick="irPara('nova-pub', null)">
-        ✏️ O que você quer compartilhar hoje?
-    </button>
+    <header class="barra-topo" id="barra-topo" style="display:none;">
+        <span class="barra-topo-logo">🌿</span>
 
-    <div class="feed">
-        <article class="card">
-            <div class="card-topo">
-                <div class="avatar av1"><img src="assets/idosa1.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
-                <div class="card-meta">
-                    <div class="card-nome">Maria Luzia</div>
-                    <div class="card-tempo">🕐 Há 2 horas</div>
-                </div>
-                <span class="card-tag">Saúde</span>
-            </div>
-            <div class="card-img bg1"><img src="assets/idosacaminhando.png" style="width:100%;height:100%;object-fit:scale-down;"></div>
-            <div class="card-corpo">
-                <div class="card-titulo">Caminhada matinal faz bem para o corpo e a mente</div>
-                <div class="card-texto">Olá pessoal! Comecei a caminhar todo dia de manhã, só 30 minutos. A diferença na disposição é incrível! Quem mais faz isso? 💪</div>
-            </div>
-            <div class="card-acoes">
-                <button class="btn-acao" onclick="curtir(this)"><span class="btn-icone">❤️</span> <span class="cnt">24</span></button>
-                <button class="btn-acao"><span class="btn-icone">💬</span> Comentar</button>
-                <button class="btn-acao"><span class="btn-icone">↗️</span> Compartilhar</button>
-            </div>
-        </article>
+        <span class="barra-topo-titulo" id="titulo-topo">ConectaVida</span>
 
-        <article class="card">
-            <div class="card-topo">
-                <div class="avatar av2">👴</div>
-                <div class="card-meta">
-                    <div class="card-nome">José Roberto</div>
-                    <div class="card-tempo">🕐 Há 5 horas</div>
-                </div>
-                <span class="card-tag">Evento</span>
-            </div>
-            <div class="card-img bg2">🎵</div>
-            <div class="card-corpo">
-                <div class="card-titulo">Tarde de Música no Parque — Sábado às 15h 🎶</div>
-                <div class="card-texto">Convido todos para a tarde musical no Parque da Cidade no sábado. Violão ao vivo, forró e muita conversa boa. Entrada gratuita! 😊</div>
-            </div>
-            <div class="card-acoes">
-                <button class="btn-acao" onclick="curtir(this)"><span class="btn-icone">❤️</span> <span class="cnt">57</span></button>
-                <button class="btn-acao"><span class="btn-icone">💬</span> Comentar</button>
-                <button class="btn-acao"><span class="btn-icone">↗️</span> Compartilhar</button>
-            </div>
-        </article>
+        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
 
-        <article class="card">
-            <div class="card-topo">
-                <div class="avatar av3">👩</div>
-                <div class="card-meta">
-                    <div class="card-nome">Tereza Aparecida</div>
-                    <div class="card-tempo">🕐 Ontem</div>
-                </div>
-                <span class="card-tag">Receita</span>
-            </div>
-            <div class="card-img bg3">🍲</div>
-            <div class="card-corpo">
-                <div class="card-titulo">Sopa de Legumes com Frango — rápida e nutritiva 🥕</div>
-                <div class="card-texto">Trouxe uma receita que minha mãe me ensinou. Pronta em 30 minutos e muito gostosa! Quem quiser, é só pedir nos comentários. 🍵</div>
-            </div>
-            <div class="card-acoes">
-                <button class="btn-acao" onclick="curtir(this)"><span class="btn-icone">❤️</span> <span class="cnt">38</span></button>
-                <button class="btn-acao"><span class="btn-icone">💬</span> Comentar</button>
-                <button class="btn-acao"><span class="btn-icone">↗️</span> Compartilhar</button>
-            </div>
-        </article>
-    </div>
-</div>
+    </header>
 
-<!-- ════════════════════════
-     TELA 3: NOVA PUBLICAÇÃO
-════════════════════════ -->
-<div class="pagina" id="pg-nova-pub">
+    <div class="tela ativa" id="tela-login" style="margin-top:0;">
+        <div class="login-logo">🌿</div>
 
-    <!-- Formulário -->
-    <div class="nova-pub-form" id="nova-pub-form">
-        <div class="nova-pub-autor">
-            <div class="nova-pub-avatar">👴</div>
-            <div class="nova-pub-nome">Carlos Eduardo</div>
-        </div>
+        <div class="login-nome-app">ConectaVida</div>
 
-        <div>
-            <label class="campo-label">📝 O que você quer compartilhar?</label>
-            <textarea class="campo-textarea" id="pub-texto" placeholder="Escreva aqui sua publicação..." maxlength="300" oninput="contarChars()"></textarea>
-            <div class="contador-chars" id="contador">0 / 300 caracteres</div>
-            <div class="msg-erro-campo" id="erro-pub-texto">⚠️ Escreva algo antes de publicar.</div>
-        </div>
+        <div class="login-subtitulo">Conectando pessoas com carinho ✨</div>
 
-        <div>
-            <label class="campo-label">🏷️ Categoria</label>
-            <select class="campo-select" id="pub-categoria">
-                <option value="">— Escolha uma categoria —</option>
-                <option value="saude">🌱 Saúde</option>
-                <option value="evento">🎉 Evento</option>
-                <option value="dica">📚 Dica</option>
-                <option value="alimentacao">🍎 Alimentação</option>
-                <option value="casa">🏡 Casa</option>
-                <option value="comunidade">🤝 Comunidade</option>
-            </select>
-            <div class="msg-erro-campo" id="erro-pub-cat">⚠️ Escolha uma categoria.</div>
-        </div>
+        <div class="formulario-login">
 
-        <button class="btn-principal" onclick="publicar()">📢 Publicar</button>
-        <button class="btn-secundario" onclick="irPara('inicio', null)" style="text-align:center;">Cancelar</button>
-    </div>
+            <div class="caixa-erro-login" id="caixa-erro-login">
+                ⚠️ Usuário ou senha incorretos. Verifique os dados e tente novamente.
+                <br>
 
-    <!-- Estado: sucesso -->
-    <div class="pub-sucesso" id="pub-sucesso">
-        <div class="pub-sucesso-icone">✅</div>
-        <div class="pub-sucesso-titulo">Publicado com sucesso!</div>
-        <div class="pub-sucesso-texto">Sua publicação já está visível para seus amigos.</div>
-        <button class="btn-principal" style="max-width:300px;" onclick="irPara('inicio',null)">🏠 Voltar ao Início</button>
-        <button class="btn-secundario" onclick="novaPubReset()">✏️ Fazer outra publicação</button>
-    </div>
-</div>
-
-<!-- ════════════════════════
-     TELA 4: MENSAGENS
-════════════════════════ -->
-<div class="pagina" id="pg-mensagens">
-    <div class="msg-lista" id="msg-lista">
-        <div class="msg-item" onclick="abrirConversa('Maria das Graças','mav1','👩‍🦳')">
-            <div class="msg-avatar mav1">👩‍🦳</div>
-            <div class="msg-info">
-                <div class="msg-nome">Maria das Graças</div>
-                <div class="msg-preview nao-lida">Boa tarde! Vi sua publicação sobre caminhada 😊</div>
+                <button class="botao-recuperar-senha" onclick="document.getElementById('modal-senha').classList.add('aberto')">
+                    🔑 Esqueci minha senha
+                </button>
             </div>
-            <div class="msg-lado">
-                <span class="msg-hora">14:32</span>
-                <span class="msg-bolinha">2</span>
-            </div>
-        </div>
-        <div class="msg-item" onclick="abrirConversa('José Roberto','mav2','👴')">
-            <div class="msg-avatar mav2">👴</div>
-            <div class="msg-info">
-                <div class="msg-nome">José Roberto</div>
-                <div class="msg-preview">Até sábado então! Vai ser ótimo 🎵</div>
-            </div>
-            <div class="msg-lado"><span class="msg-hora">11:05</span></div>
-        </div>
-        <div class="msg-item" onclick="abrirConversa('Tereza Aparecida','mav3','👩')">
-            <div class="msg-avatar mav3">👩</div>
-            <div class="msg-info">
-                <div class="msg-nome">Tereza Aparecida</div>
-                <div class="msg-preview nao-lida">Vou te mandar a receita completa, espera! 🍲</div>
-            </div>
-            <div class="msg-lado">
-                <span class="msg-hora">Ontem</span>
-                <span class="msg-bolinha">1</span>
-            </div>
-        </div>
-        <div class="msg-item" onclick="abrirConversa('Antônio Carlos','mav4','👨‍🦲')">
-            <div class="msg-avatar mav4">👨‍🦲</div>
-            <div class="msg-info">
-                <div class="msg-nome">Antônio Carlos</div>
-                <div class="msg-preview">Tudo bem por aí? Faz tempo que não nos falamos</div>
-            </div>
-            <div class="msg-lado"><span class="msg-hora">Segunda</span></div>
-        </div>
-    </div>
 
-    <div class="conversa-wrap" id="conversa-wrap">
-        <div class="conversa-topo">
-            <button class="btn-voltar" onclick="voltarMensagens()">◀</button>
-            <div class="msg-avatar" id="conv-avatar" style="width:46px;height:46px;font-size:1.4rem;"></div>
             <div>
-                <div class="conversa-nome" id="conv-nome"></div>
-                <div class="conversa-status">● Online</div>
+                <label class="rotulo-campo" for="campo-usuario">👤 Usuário</label>
+
+                <input class="campo-texto" id="campo-usuario" type="text" placeholder="Digite seu nome de usuário">
+
+                <div class="mensagem-erro-campo" id="erro-usuario">⚠️ Por favor, preencha o usuário.</div>
+
+            </div>
+
+            <div>
+                <label class="rotulo-campo" for="campo-senha">🔒 Senha</label>
+
+                <input class="campo-texto" id="campo-senha" type="password" placeholder="Digite sua senha">
+
+                <div class="mensagem-erro-campo" id="erro-senha">⚠️ Por favor, preencha a senha.</div>
+
+            </div>
+
+            <button class="botao-principal" id="botao-entrar" onclick="fazerLogin()">Entrar</button>
+
+            <div class="link-esqueci-senha" onclick="document.getElementById('modal-senha').classList.add('aberto')">
+                Esqueci minha senha
+
+            </div>
+
+            <div style="font-size:0.88rem; font-weight:700; color:var(--cor-cinza); text-align:center; margin-top:4px;">
+                💡 Dica: use <strong>admin</strong> / <strong>1234</strong> para entrar
             </div>
         </div>
-        <div class="conversa-msgs" id="conv-msgs"></div>
-        <div class="conversa-input">
-            <input class="campo-msg" id="campo-msg" type="text" placeholder="Digite sua mensagem...">
-            <button class="btn-enviar" onclick="enviarMsg()">➤</button>
-        </div>
     </div>
-</div>
 
-<!-- ════════════════════════
-     TELA 5: PERFIL
-════════════════════════ -->
-<div class="pagina" id="pg-perfil">
-    <div class="perfil-cabecalho">
-        <div class="perfil-avatar">👴</div>
-        <div class="perfil-nome">Carlos Eduardo</div>
-        <div class="perfil-bio">Aposentado • Amante de música e natureza 🌿<br>Recife, Pernambuco</div>
-    </div>
-    <div class="perfil-stats">
-        <div class="stat"><span class="stat-num">12</span><span class="stat-label">Publicações</span></div>
-        <div class="stat"><span class="stat-num">148</span><span class="stat-label">Amigos</span></div>
-        <div class="stat"><span class="stat-num">234</span><span class="stat-label">Curtidas</span></div>
-    </div>
-    <div class="perfil-secao-titulo">Minhas Publicações</div>
-    <div class="perfil-publicacao-mini">
-        <div class="pub-mini-corpo">
-            <div class="pub-mini-titulo">Fui pescar hoje cedo e valeu a pena! 🎣</div>
-            <div class="pub-mini-texto">Acordei às 5h, fui pro rio com o vizinho... peguei 3 peixes!</div>
-        </div>
-        <div class="pub-mini-rodape">
-            <span class="pub-mini-stat">❤️ 31 curtidas</span>
-            <span class="pub-mini-stat">💬 8 comentários</span>
-            <span class="pub-mini-stat">🕐 3 dias atrás</span>
-        </div>
-    </div>
-    <div class="perfil-publicacao-mini">
-        <div class="pub-mini-corpo">
-            <div class="pub-mini-titulo">Dica de remédio natural para dor nas costas 💊</div>
-            <div class="pub-mini-texto">Meu médico indicou essa receita de chá e está ajudando muito!</div>
-        </div>
-        <div class="pub-mini-rodape">
-            <span class="pub-mini-stat">❤️ 45 curtidas</span>
-            <span class="pub-mini-stat">💬 14 comentários</span>
-            <span class="pub-mini-stat">🕐 1 semana atrás</span>
-        </div>
-    </div>
-    <div class="perfil-secao-titulo">Configurações</div>
-    <div class="perfil-opcao"><span class="perfil-opcao-icone">✏️</span> Editar Perfil <span class="perfil-opcao-seta">›</span></div>
-    <div class="perfil-opcao"><span class="perfil-opcao-icone">🔔</span> Notificações <span class="perfil-opcao-seta">›</span></div>
-    <div class="perfil-opcao"><span class="perfil-opcao-icone">🔒</span> Privacidade <span class="perfil-opcao-seta">›</span></div>
-    <div class="perfil-opcao"><span class="perfil-opcao-icone">🆘</span> Ajuda e Suporte <span class="perfil-opcao-seta">›</span></div>
-    <div class="perfil-opcao" style="color:#c0392b;" onclick="confirmarSaida()">
-        <span class="perfil-opcao-icone">🚪</span> Sair da Conta <span class="perfil-opcao-seta">›</span>
-    </div>
-</div>
+    <div class="tela" id="tela-inicio">
 
-<!-- ══ NAV INFERIOR ══ -->
-<nav class="nav-inferior" id="nav-inferior" style="display:none;">
-    <a href="#" class="ativo" onclick="irPara('inicio',this)">
-        <span class="nav-icone">🏠</span> Início
-    </a>
-    <a href="#" onclick="irPara('mensagens',this)">
-        <span class="nav-icone">💬</span> Mensagens
-    </a>
-    <a href="#" onclick="irPara('perfil',this)">
-        <span class="nav-icone">👤</span> Perfil
-    </a>
-</nav>
-<script src="scripts/script.js"></script>
+        <div class="carrossel-container">
+            <div class="carrossel-faixa" id="carrossel-faixa">
+
+                <div class="item-categoria"><span class="icone-categoria">📰</span> Tudo</div>
+                <div class="item-categoria"><span class="icone-categoria">🌱</span> Saúde</div>
+                <div class="item-categoria"><span class="icone-categoria">🎉</span> Eventos</div>
+                <div class="item-categoria"><span class="icone-categoria">📚</span> Dicas</div>
+                <div class="item-categoria"><span class="icone-categoria">🍎</span> Alimentação</div>
+                <div class="item-categoria"><span class="icone-categoria">🏡</span> Casa</div>
+                <div class="item-categoria"><span class="icone-categoria">💊</span> Remédios</div>
+                <div class="item-categoria"><span class="icone-categoria">🤝</span> Comunidade</div>
+
+            </div>
+        </div>
+
+        <button class="botao-nova-publicacao" onclick="irParaTela('tela-nova-publicacao', null)">
+            ✏️ O que você quer compartilhar hoje?
+
+        </button>
+
+        <div class="lista-publicacoes">
+
+            <div class="publicacao">
+                <div class="publicacao-cabecalho">
+
+                    <div class="foto-perfil foto-perfil-amarelo">
+                        <img src="assets/idosa1.png" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+
+                    </div>
+                    <div class="publicacao-info">
+                        <div class="publicacao-autor">Maria Luzia</div>
+                        <div class="publicacao-tempo">🕐 Há 2 horas</div>
+                    </div>
+                    <span class="publicacao-categoria">Saúde</span>
+
+                </div>
+
+                <div class="publicacao-imagem fundo-verde-claro">
+                    <img src="assets/idosacaminhando.png" style="width:100%; height:auto; display:block;">
+                </div>
+                <div class="publicacao-conteudo">
+                    <div class="publicacao-titulo">Caminhada matinal faz bem para o corpo e a mente</div>
+                    <div class="publicacao-texto">Olá pessoal! Comecei a caminhar todo dia de manhã, só 30 minutos. A diferença na disposição é incrível! Quem mais faz isso? 💪</div>
+                </div>
+                <div class="publicacao-botoes">
+
+                    <button class="botao-acao" onclick="curtir(this)"><span class="icone-botao">❤️</span> <span class="contador-curtidas">24</span></button>
+                    <button class="botao-acao"><span class="icone-botao">💬</span> Comentar</button>
+                    <button class="botao-acao"><span class="icone-botao">↗️</span> Compartilhar</button>
+                </div>
+            </div>
+
+            <div class="publicacao">
+                <div class="publicacao-cabecalho">
+
+                    <div class="foto-perfil foto-perfil-verde">👴</div>
+                    <div class="publicacao-info">
+                        <div class="publicacao-autor">José Roberto</div>
+                        <div class="publicacao-tempo">🕐 Há 5 horas</div>
+                    </div>
+                    <span class="publicacao-categoria">Evento</span>
+                </div>
+
+                <div class="publicacao-imagem fundo-azul-claro">🎵</div>
+                <div class="publicacao-conteudo">
+                    <div class="publicacao-titulo">Tarde de Música no Parque — Sábado às 15h 🎶</div>
+                    <div class="publicacao-texto">Convido todos para a tarde musical no Parque da Cidade no sábado. Violão ao vivo, forró e muita conversa boa. Entrada gratuita! 😊</div>
+                </div>
+                <div class="publicacao-botoes">
+                    <button class="botao-acao" onclick="curtir(this)"><span class="icone-botao">❤️</span> <span class="contador-curtidas">57</span></button>
+                    <button class="botao-acao"><span class="icone-botao">💬</span> Comentar</button>
+                    <button class="botao-acao"><span class="icone-botao">↗️</span> Compartilhar</button>
+                </div>
+            </div>
+
+            <div class="publicacao">
+                <div class="publicacao-cabecalho">
+                    <div class="foto-perfil foto-perfil-azul">👩</div>
+                    <div class="publicacao-info">
+                        <div class="publicacao-autor">Tereza Aparecida</div>
+                        <div class="publicacao-tempo">🕐 Ontem</div>
+                    </div>
+                    <span class="publicacao-categoria">Receita</span>
+                </div>
+                <div class="publicacao-imagem fundo-amarelo-claro">🍲</div>
+                <div class="publicacao-conteudo">
+                    <div class="publicacao-titulo">Sopa de Legumes com Frango — rápida e nutritiva 🥕</div>
+                    <div class="publicacao-texto">Trouxe uma receita que minha mãe me ensinou. Pronta em 30 minutos e muito gostosa! Quem quiser, é só pedir nos comentários. 🍵</div>
+                </div>
+                <div class="publicacao-botoes">
+                    <button class="botao-acao" onclick="curtir(this)"><span class="icone-botao">❤️</span> <span class="contador-curtidas">38</span></button>
+                    <button class="botao-acao"><span class="icone-botao">💬</span> Comentar</button>
+                    <button class="botao-acao"><span class="icone-botao">↗️</span> Compartilhar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="tela" id="tela-nova-publicacao">
+
+        <div class="formulario-publicacao" id="formulario-publicacao">
+
+            <div class="autor-publicacao">
+                <div class="foto-autor">👴</div>
+
+                <div class="nome-autor">Carlos Eduardo</div>
+
+            </div>
+
+            <div>
+                <label class="rotulo-campo">📝 O que você quer compartilhar?</label>
+
+                <textarea class="campo-grande" id="texto-publicacao" placeholder="Escreva aqui sua publicação..." maxlength="300" oninput="atualizarContador()"></textarea>
+
+                <div class="contador-letras" id="contador-letras">0 / 300 caracteres</div>
+
+                <div class="mensagem-erro-campo" id="erro-texto-publicacao">⚠️ Escreva algo antes de publicar.</div>
+
+            </div>
+
+            <div>
+                <label class="rotulo-campo">🏷️ Categoria</label>
+                <select class="campo-selecao" id="categoria-publicacao">
+
+                    <option value="">— Escolha uma categoria —</option>
+                    <option value="saude">🌱 Saúde</option>
+                    <option value="evento">🎉 Evento</option>
+                    <option value="dica">📚 Dica</option>
+                    <option value="alimentacao">🍎 Alimentação</option>
+                    <option value="casa">🏡 Casa</option>
+                    <option value="comunidade">🤝 Comunidade</option>
+                </select>
+                <div class="mensagem-erro-campo" id="erro-categoria-publicacao">⚠️ Escolha uma categoria.</div>
+
+            </div>
+
+            <button class="botao-principal" onclick="publicar()">📢 Publicar</button>
+
+            <button class="botao-secundario" onclick="irParaTela('tela-inicio', null)">Cancelar</button>
+        </div>
+
+        <div class="tela-sucesso-publicacao" id="tela-sucesso-publicacao">
+            <div class="icone-sucesso">✅</div>
+            <div class="titulo-sucesso">Publicado com sucesso!</div>
+            <div class="texto-sucesso">Sua publicação já está visível para seus amigos.</div>
+
+            <button class="botao-principal" style="max-width:300px;" onclick="irParaTela('tela-inicio', null)">🏠 Voltar ao Início</button>
+
+            <button class="botao-secundario" onclick="reiniciarFormulario()">✏️ Fazer outra publicação</button>
+        </div>
+    </div>
+
+    <div class="tela" id="tela-mensagens">
+
+        <div class="lista-conversas" id="lista-conversas">
+
+            <div class="item-conversa" onclick="abrirConversa('Maria das Graças', 'foto-contato-amarelo', '👩‍🦳')">
+                <div class="foto-contato foto-contato-amarelo">👩‍🦳</div>
+                <div class="info-conversa">
+                    <div class="nome-contato">Maria das Graças</div>
+
+                    <div class="previa-mensagem nao-lida">Boa tarde! Vi sua publicação sobre caminhada 😊</div>
+                </div>
+                <div class="lado-direito-conversa">
+                    <span class="hora-mensagem">14:32</span>
+
+                    <span class="bolinha-nao-lida">2</span>
+                </div>
+            </div>
+
+            <div class="item-conversa" onclick="abrirConversa('José Roberto', 'foto-contato-verde', '👴')">
+                <div class="foto-contato foto-contato-verde">👴</div>
+                <div class="info-conversa">
+                    <div class="nome-contato">José Roberto</div>
+                    <div class="previa-mensagem">Até sábado então! Vai ser ótimo 🎵</div>
+
+                </div>
+                <div class="lado-direito-conversa">
+                    <span class="hora-mensagem">11:05</span>
+
+                </div>
+            </div>
+
+            <div class="item-conversa" onclick="abrirConversa('Tereza Aparecida', 'foto-contato-azul', '👩')">
+                <div class="foto-contato foto-contato-azul">👩</div>
+                <div class="info-conversa">
+                    <div class="nome-contato">Tereza Aparecida</div>
+                    <div class="previa-mensagem nao-lida">Vou te mandar a receita completa, espera! 🍲</div>
+                </div>
+                <div class="lado-direito-conversa">
+                    <span class="hora-mensagem">Ontem</span>
+                    <span class="bolinha-nao-lida">1</span>
+                </div>
+            </div>
+
+            <div class="item-conversa" onclick="abrirConversa('Antônio Carlos', 'foto-contato-rosa', '👨‍🦲')">
+                <div class="foto-contato foto-contato-rosa">👨‍🦲</div>
+                <div class="info-conversa">
+                    <div class="nome-contato">Antônio Carlos</div>
+                    <div class="previa-mensagem">Tudo bem por aí? Faz tempo que não nos falamos</div>
+                </div>
+                <div class="lado-direito-conversa">
+                    <span class="hora-mensagem">Segunda</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="area-conversa" id="area-conversa">
+
+            <div class="cabecalho-conversa">
+
+                <button class="botao-voltar" onclick="voltarParaLista()">◀</button>
+
+                <div class="foto-contato" id="foto-contato-conversa" style="width:46px; height:46px; font-size:1.4rem;"></div>
+                <div>
+                    <div class="nome-na-conversa" id="nome-na-conversa"></div>
+                    <div class="status-online">● Online</div>
+
+                </div>
+            </div>
+
+            <div class="mensagens-conversa" id="mensagens-conversa"></div>
+
+            <div class="barra-digitar">
+
+                <input class="campo-digitar" id="campo-digitar" type="text" placeholder="Digite sua mensagem...">
+
+                <button class="botao-enviar" onclick="enviarMensagem()">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tela" id="tela-perfil">
+
+        <div class="cabecalho-perfil">
+            <div class="foto-perfil-grande">👴</div>
+
+            <div class="nome-perfil">Carlos Eduardo</div>
+            <div class="bio-perfil">Aposentado • Amante de música e natureza 🌿<br>Recife, Pernambuco</div>
+
+        </div>
+
+        <div class="numeros-perfil">
+            <div class="numero-item">
+                <span class="numero-valor">12</span>
+                <span class="numero-rotulo">Publicações</span>
+            </div>
+            <div class="numero-item">
+                <span class="numero-valor">148</span>
+                <span class="numero-rotulo">Amigos</span>
+            </div>
+            <div class="numero-item">
+                <span class="numero-valor">234</span>
+                <span class="numero-rotulo">Curtidas</span>
+            </div>
+        </div>
+
+        <div class="titulo-secao">Minhas Publicações</div>
+
+        <div class="mini-publicacao">
+            <div class="mini-publicacao-corpo">
+                <div class="mini-publicacao-titulo">Fui pescar hoje cedo e valeu a pena! 🎣</div>
+                <div class="mini-publicacao-texto">Acordei às 5h, fui pro rio com o vizinho... peguei 3 peixes!</div>
+            </div>
+            <div class="mini-publicacao-rodape">
+                <span class="mini-publicacao-numero">❤️ 31 curtidas</span>
+                <span class="mini-publicacao-numero">💬 8 comentários</span>
+                <span class="mini-publicacao-numero">🕐 3 dias atrás</span>
+            </div>
+        </div>
+
+        <div class="mini-publicacao">
+            <div class="mini-publicacao-corpo">
+                <div class="mini-publicacao-titulo">Dica de remédio natural para dor nas costas 💊</div>
+                <div class="mini-publicacao-texto">Meu médico indicou essa receita de chá e está ajudando muito!</div>
+            </div>
+            <div class="mini-publicacao-rodape">
+                <span class="mini-publicacao-numero">❤️ 45 curtidas</span>
+                <span class="mini-publicacao-numero">💬 14 comentários</span>
+                <span class="mini-publicacao-numero">🕐 1 semana atrás</span>
+            </div>
+        </div>
+
+        <div class="titulo-secao">Configurações</div>
+
+        <div class="opcao-configuracao">
+            <span class="icone-opcao">✏️</span> Editar Perfil
+            <span class="seta-opcao">›</span>
+        </div>
+        <div class="opcao-configuracao">
+            <span class="icone-opcao">🔔</span> Notificações
+            <span class="seta-opcao">›</span>
+        </div>
+        <div class="opcao-configuracao">
+            <span class="icone-opcao">🔒</span> Privacidade
+            <span class="seta-opcao">›</span>
+        </div>
+        <div class="opcao-configuracao">
+            <span class="icone-opcao">🆘</span> Ajuda e Suporte
+            <span class="seta-opcao">›</span>
+        </div>
+
+        <div class="opcao-configuracao" style="color:#c0392b;" onclick="sairDaConta()">
+            <span class="icone-opcao">🚪</span> Sair da Conta
+            <span class="seta-opcao">›</span>
+        </div>
+    </div>
+
+    <nav class="barra-nav" id="barra-nav" style="display:none;">
+
+        <a href="#" class="ativo" onclick="irParaTela('tela-inicio', this)">
+            <span class="icone-nav">🏠</span> Início
+        </a>
+
+        <a href="#" onclick="irParaTela('tela-mensagens', this)">
+            <span class="icone-nav">💬</span> Mensagens
+        </a>
+
+        <a href="#" onclick="irParaTela('tela-perfil', this)">
+            <span class="icone-nav">👤</span> Perfil
+        </a>
+    </nav>
+    <script src="scripts/script.js"></script>
 </body>
+
 </html>

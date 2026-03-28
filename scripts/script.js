@@ -1,260 +1,318 @@
-/* ══ CARROSSEL ══ */
-const track = document.getElementById('track');
-track.innerHTML += track.innerHTML;
+var faixa = document.getElementById('carrossel-faixa');
 
-/* ══ TOAST ══ */
-let toastTimer;
-function mostrarToast(msg, tipo) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = 'toast ' + tipo + ' mostrar';
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.className = 'toast', 3000);
-}
+        faixa.innerHTML = faixa.innerHTML + faixa.innerHTML;
 
-/* ══ LOADING ══ */
-function mostrarLoading(txt) {
-    document.getElementById('loading-texto').textContent = txt || 'Carregando...';
-    document.getElementById('overlay-loading').classList.add('ativo');
-}
-function esconderLoading() {
-    document.getElementById('overlay-loading').classList.remove('ativo');
-}
+        var titulos = {
+            'tela-inicio': 'ConectaVida',
+            'tela-mensagens': 'Mensagens',
+            'tela-nova-publicacao': 'Nova Publicação',
+            'tela-perfil': 'Meu Perfil'
+        };
 
-/* ══ MODAL ══ */
-function fecharModal() {
-    document.getElementById('modal-senha').classList.remove('aberto');
-}
+        var historico = {
+            'Maria das Graças': [
+                { quem: 'eles', texto: 'Olá! Vi sua publicação sobre caminhada 😊', hora: '14:20' },
 
-/* ══ LOGIN ══ */
-function tentarLogin() {
-    const usuario = document.getElementById('input-usuario').value.trim();
-    const senha   = document.getElementById('input-senha').value.trim();
-    let ok = true;
+                { quem: 'eu',   texto: 'Que bom! Tem me ajudado muito!', hora: '14:25' },
+                { quem: 'eles', texto: 'Boa tarde! Vi sua publicação sobre caminhada 😊', hora: '14:32' }
+            ],
+            'José Roberto': [
+                { quem: 'eu',   texto: 'Vou ao evento no parque no sábado!', hora: '10:50' },
+                { quem: 'eles', texto: 'Ótimo! Vai ser muito bom 🎵', hora: '11:00' },
+                { quem: 'eles', texto: 'Até sábado então! Vai ser ótimo 🎵', hora: '11:05' }
+            ],
+            'Tereza Aparecida': [
+                { quem: 'eu',   texto: 'Adorei a ideia da sopa! Pode me mandar a receita?', hora: 'Ontem' },
+                { quem: 'eles', texto: 'Claro! Vou te mandar a receita completa, espera! 🍲', hora: 'Ontem' }
+            ],
+            'Antônio Carlos': [
+                { quem: 'eles', texto: 'Tudo bem por aí? Faz tempo que não nos falamos', hora: 'Segunda' }
+            ]
+        };
 
-    // Limpar estados anteriores
-    ['input-usuario','input-senha'].forEach(id => {
-        document.getElementById(id).classList.remove('invalido');
-    });
-    ['erro-usuario','erro-senha'].forEach(id => {
-        document.getElementById(id).classList.remove('visivel');
-    });
-    document.getElementById('alerta-login').classList.remove('visivel');
+        var conversaAberta = '';
 
-    // Validação de campos vazios
-    if (!usuario) {
-        document.getElementById('input-usuario').classList.add('invalido');
-        document.getElementById('erro-usuario').classList.add('visivel');
-        ok = false;
-    }
-    if (!senha) {
-        document.getElementById('input-senha').classList.add('invalido');
-        document.getElementById('erro-senha').classList.add('visivel');
-        ok = false;
-    }
-    if (!ok) return;
-
-    // Estado: carregando
-    const btn = document.getElementById('btn-entrar');
-    btn.disabled = true;
-    btn.textContent = 'Entrando...';
-    mostrarLoading('Verificando seus dados...');
-
-    setTimeout(() => {
-        esconderLoading();
-        btn.disabled = false;
-        btn.textContent = 'Entrar';
-
-        // Fluxo alternativo: credenciais erradas
-        if (usuario !== 'admin' || senha !== '1234') {
-            document.getElementById('input-usuario').classList.add('invalido');
-            document.getElementById('input-senha').classList.add('invalido');
-            document.getElementById('alerta-login').classList.add('visivel');
-            mostrarToast('❌ Usuário ou senha incorretos', 'erro');
-            return;
+        function exibirNotificacao(mensagem, tipo) {
+            var el = document.getElementById('notificacao'); 
+            el.textContent = mensagem;                       
+            el.className = 'notificacao ' + tipo + ' visivel'; 
+            setTimeout(function() {                          
+                el.className = 'notificacao';                
+            }, 3000);
         }
 
-        // Fluxo principal: sucesso
-        mostrarToast('✅ Bem-vindo, Carlos Eduardo!', 'sucesso');
-        document.getElementById('topo').style.display = 'flex';
-        document.getElementById('nav-inferior').style.display = 'flex';
-        document.getElementById('pg-login').style.display = 'none';
-        irPara('inicio', document.querySelector('.nav-inferior a'));
-    }, 1800);
-}
+        function mostrarCarregando(texto) {
+            document.getElementById('texto-carregando').textContent = texto; 
+            document.getElementById('tela-carregando').classList.add('ativa'); 
+        }
 
-// Enter no campo de senha
-document.getElementById('input-senha').addEventListener('keydown', e => {
-    if (e.key === 'Enter') tentarLogin();
-});
+        function esconderCarregando() {
+            document.getElementById('tela-carregando').classList.remove('ativa'); 
+        }
 
-/* ══ NAVEGAÇÃO ══ */
-const titulos = {
-    inicio: 'ConectaVida',
-    mensagens: 'Mensagens',
-    'nova-pub': 'Nova Publicação',
-    perfil: 'Meu Perfil'
-};
-const mostrarPesquisa = { inicio: true, mensagens: false, 'nova-pub': false, perfil: false };
+        function fecharModal() {
+            document.getElementById('modal-senha').classList.remove('aberto'); 
+        }
 
-function irPara(pg, link) {
-    if (event) event.preventDefault();
-    if (pg !== 'mensagens') voltarMensagens(false);
+        function fazerLogin() {
+            var usuario = document.getElementById('campo-usuario').value.trim(); 
+            var senha = document.getElementById('campo-senha').value.trim();     
+            var tudoCerto = true; 
 
-    document.querySelectorAll('.pagina').forEach(p => p.classList.remove('ativa'));
-    document.getElementById('pg-' + pg).classList.add('ativa');
+            document.getElementById('campo-usuario').classList.remove('invalido');
+            document.getElementById('campo-senha').classList.remove('invalido');
+            document.getElementById('erro-usuario').classList.remove('visivel');
+            document.getElementById('erro-senha').classList.remove('visivel');
+            document.getElementById('caixa-erro-login').classList.remove('visivel');
 
-    if (link) {
-        document.querySelectorAll('.nav-inferior a').forEach(a => a.classList.remove('ativo'));
-        link.classList.add('ativo');
-    }
+            if (usuario == '') {
+                document.getElementById('campo-usuario').classList.add('invalido'); 
+                document.getElementById('erro-usuario').classList.add('visivel');   
+                tudoCerto = false; 
+            }
 
-    document.getElementById('topo-titulo').textContent = titulos[pg] || 'ConectaVida';
-    document.getElementById('barra-pesquisa').style.display = mostrarPesquisa[pg] ? '' : 'none';
-}
+            if (senha == '') {
+                document.getElementById('campo-senha').classList.add('invalido');
+                document.getElementById('erro-senha').classList.add('visivel');
+                tudoCerto = false;
+            }
 
-/* ══ CURTIR ══ */
-function curtir(btn) {
-    btn.classList.toggle('curtido');
-    const cnt = btn.querySelector('.cnt');
-    const icone = btn.querySelector('.btn-icone');
-    let n = parseInt(cnt.textContent);
-    if (btn.classList.contains('curtido')) {
-        cnt.textContent = n + 1; icone.textContent = '💚';
-        mostrarToast('💚 Você curtiu essa publicação!', 'sucesso');
-    } else {
-        cnt.textContent = n - 1; icone.textContent = '❤️';
-    }
-}
+            if (tudoCerto == false) {
+                return; 
+            }
 
-/* ══ NOVA PUBLICAÇÃO ══ */
-function contarChars() {
-    const txt = document.getElementById('pub-texto').value;
-    const cont = document.getElementById('contador');
-    cont.textContent = txt.length + ' / 300 caracteres';
-    cont.classList.toggle('limite', txt.length >= 280);
-}
+            var botao = document.getElementById('botao-entrar');
+            botao.disabled = true;               
+            botao.textContent = 'Entrando...';   
+            mostrarCarregando('Verificando seus dados...'); 
 
-function publicar() {
-    const texto = document.getElementById('pub-texto').value.trim();
-    const cat   = document.getElementById('pub-categoria').value;
-    let ok = true;
+            setTimeout(function() {
+                esconderCarregando();      
+                botao.disabled = false;    
+                botao.textContent = 'Entrar'; 
 
-    document.getElementById('pub-texto').classList.remove('invalido');
-    document.getElementById('pub-categoria').classList.remove('invalido');
-    document.getElementById('erro-pub-texto').classList.remove('visivel');
-    document.getElementById('erro-pub-cat').classList.remove('visivel');
+                if (usuario != 'admin' || senha != '1234') {
 
-    if (!texto) {
-        document.getElementById('pub-texto').classList.add('invalido');
-        document.getElementById('erro-pub-texto').classList.add('visivel');
-        ok = false;
-    }
-    if (!cat) {
-        document.getElementById('pub-categoria').classList.add('invalido');
-        document.getElementById('erro-pub-cat').classList.add('visivel');
-        ok = false;
-    }
-    if (!ok) { mostrarToast('⚠️ Preencha todos os campos', 'erro'); return; }
+                    document.getElementById('campo-usuario').classList.add('invalido');
+                    document.getElementById('campo-senha').classList.add('invalido');
+                    document.getElementById('caixa-erro-login').classList.add('visivel');
+                    exibirNotificacao('❌ Usuário ou senha incorretos', 'erro');
+                    return; 
+                }
 
-    mostrarLoading('Publicando...');
-    setTimeout(() => {
-        esconderLoading();
-        document.getElementById('nova-pub-form').style.display = 'none';
-        document.getElementById('pub-sucesso').classList.add('visivel');
-        mostrarToast('✅ Publicação enviada!', 'sucesso');
-    }, 1500);
-}
+                exibirNotificacao('✅ Bem-vindo, Carlos Eduardo!', 'sucesso'); 
+                document.getElementById('barra-topo').style.display = 'flex'; 
+                document.getElementById('barra-nav').style.display = 'flex';  
+                document.getElementById('tela-login').style.display = 'none'; 
+                irParaTela('tela-inicio', document.querySelector('.barra-nav a')); 
 
-function novaPubReset() {
-    document.getElementById('pub-texto').value = '';
-    document.getElementById('pub-categoria').value = '';
-    document.getElementById('contador').textContent = '0 / 300 caracteres';
-    document.getElementById('nova-pub-form').style.display = '';
-    document.getElementById('pub-sucesso').classList.remove('visivel');
-}
+            }, 1800); 
+        }
 
-/* ══ MENSAGENS ══ */
-const conversas = {
-    'Maria das Graças': [
-        { de:'eles', texto:'Olá! Vi sua publicação sobre caminhada 😊', hora:'14:20' },
-        { de:'eu',   texto:'Que bom! Tem me ajudado muito!', hora:'14:25' },
-        { de:'eles', texto:'Boa tarde! Vi sua publicação sobre caminhada 😊', hora:'14:32' },
-    ],
-    'José Roberto': [
-        { de:'eu',   texto:'Vou ao evento no parque no sábado!', hora:'10:50' },
-        { de:'eles', texto:'Ótimo! Vai ser muito bom 🎵', hora:'11:00' },
-        { de:'eles', texto:'Até sábado então! Vai ser ótimo 🎵', hora:'11:05' },
-    ],
-    'Tereza Aparecida': [
-        { de:'eu',   texto:'Adorei a ideia da sopa! Pode me mandar a receita?', hora:'Ontem' },
-        { de:'eles', texto:'Claro! Vou te mandar a receita completa, espera! 🍲', hora:'Ontem' },
-    ],
-    'Antônio Carlos': [
-        { de:'eles', texto:'Tudo bem por aí? Faz tempo que não nos falamos', hora:'Segunda' },
-    ],
-};
-let convAtual = '';
+        document.getElementById('campo-senha').addEventListener('keydown', function(e) {
+            if (e.key == 'Enter') { 
+                fazerLogin();       
+            }
+        });
 
-function abrirConversa(nome, classeAvatar, emoji) {
-    convAtual = nome;
-    document.getElementById('msg-lista').style.display = 'none';
-    document.getElementById('conversa-wrap').classList.add('aberta');
-    document.getElementById('conv-nome').textContent = nome;
-    const av = document.getElementById('conv-avatar');
-    av.className = 'msg-avatar ' + classeAvatar;
-    av.textContent = emoji;
-    renderizarMsgs();
-}
+        function irParaTela(idTela, botaoNav) {
+            if (event) event.preventDefault(); 
 
-function renderizarMsgs() {
-    const c = document.getElementById('conv-msgs');
-    const msgs = conversas[convAtual] || [];
-    c.innerHTML = msgs.map(m => `
-        <div>
-            <div class="balao ${m.de === 'eu' ? 'enviado' : 'recebido'}">${m.texto}</div>
-            <div class="balao-hora" style="text-align:${m.de==='eu'?'right':'left'}">${m.hora}</div>
-        </div>
-    `).join('');
-    c.scrollTop = c.scrollHeight;
-}
+            if (idTela != 'tela-mensagens') {
+                voltarParaLista(false); 
+            }
 
-function enviarMsg() {
-    const campo = document.getElementById('campo-msg');
-    const texto = campo.value.trim();
-    if (!texto) { mostrarToast('⚠️ Digite uma mensagem antes de enviar', 'erro'); return; }
-    const agora = new Date();
-    const hora = agora.getHours().toString().padStart(2,'0') + ':' + agora.getMinutes().toString().padStart(2,'0');
-    conversas[convAtual] = conversas[convAtual] || [];
-    conversas[convAtual].push({ de:'eu', texto, hora });
-    campo.value = '';
-    renderizarMsgs();
-}
+            var todasTelas = document.querySelectorAll('.tela');
+            for (var i = 0; i < todasTelas.length; i++) {
+                todasTelas[i].classList.remove('ativa');
+            }
 
-document.getElementById('campo-msg').addEventListener('keydown', e => {
-    if (e.key === 'Enter') enviarMsg();
-});
+            document.getElementById(idTela).classList.add('ativa');
 
-function voltarMensagens(mostrar = true) {
-    document.getElementById('conversa-wrap').classList.remove('aberta');
-    if (mostrar) document.getElementById('msg-lista').style.display = '';
-    convAtual = '';
-}
+            if (botaoNav != null) { 
+                var botoes = document.querySelectorAll('.barra-nav a');
+                for (var i = 0; i < botoes.length; i++) {
+                    botoes[i].classList.remove('ativo'); 
+                }
+                botaoNav.classList.add('ativo'); 
+            }
 
-/* ══ SAIR ══ */
-function confirmarSaida() {
-    if (confirm('Deseja realmente sair da sua conta?')) {
-        mostrarLoading('Saindo...');
-        setTimeout(() => {
-            esconderLoading();
-            document.getElementById('topo').style.display = 'none';
-            document.getElementById('nav-inferior').style.display = 'none';
-            document.querySelectorAll('.pagina').forEach(p => p.classList.remove('ativa'));
-            document.getElementById('pg-login').classList.add('ativa');
-            document.getElementById('pg-login').style.display = '';
-            document.getElementById('input-usuario').value = '';
-            document.getElementById('input-senha').value = '';
-            document.getElementById('alerta-login').classList.remove('visivel');
-        }, 1000);
-    }
-}
+            document.getElementById('titulo-topo').textContent = titulos[idTela] || 'ConectaVida';
+
+            if (idTela == 'tela-inicio') {
+                document.getElementById('campo-pesquisa').style.display = ''; 
+            } else {
+                document.getElementById('campo-pesquisa').style.display = 'none'; 
+            }
+        }
+
+        function curtir(botao) {
+            botao.classList.toggle('curtido'); 
+            var contador = botao.querySelector('.contador-curtidas'); 
+            var icone = botao.querySelector('.icone-botao');          
+            var numero = parseInt(contador.textContent);              
+
+            if (botao.classList.contains('curtido')) {
+
+                contador.textContent = numero + 1; 
+                icone.textContent = '💚';           
+                exibirNotificacao('💚 Você curtiu essa publicação!', 'sucesso');
+            } else {
+
+                contador.textContent = numero - 1; 
+                icone.textContent = '❤️';           
+            }
+        }
+
+        function atualizarContador() {
+            var texto = document.getElementById('texto-publicacao').value; 
+            var contador = document.getElementById('contador-letras');     
+            contador.textContent = texto.length + ' / 300 caracteres';    
+
+            if (texto.length >= 280) {
+                contador.classList.add('no-limite');    
+            } else {
+                contador.classList.remove('no-limite'); 
+            }
+        }
+
+        function publicar() {
+            var texto = document.getElementById('texto-publicacao').value.trim(); 
+            var categoria = document.getElementById('categoria-publicacao').value; 
+            var tudoCerto = true; 
+
+            document.getElementById('texto-publicacao').classList.remove('invalido');
+            document.getElementById('categoria-publicacao').classList.remove('invalido');
+            document.getElementById('erro-texto-publicacao').classList.remove('visivel');
+            document.getElementById('erro-categoria-publicacao').classList.remove('visivel');
+
+            if (texto == '') {
+                document.getElementById('texto-publicacao').classList.add('invalido');
+                document.getElementById('erro-texto-publicacao').classList.add('visivel');
+                tudoCerto = false;
+            }
+
+            if (categoria == '') {
+                document.getElementById('categoria-publicacao').classList.add('invalido');
+                document.getElementById('erro-categoria-publicacao').classList.add('visivel');
+                tudoCerto = false;
+            }
+
+            if (tudoCerto == false) {
+                exibirNotificacao('⚠️ Preencha todos os campos', 'erro');
+                return;
+            }
+
+            mostrarCarregando('Publicando...');
+
+            setTimeout(function() {
+                esconderCarregando(); 
+                document.getElementById('formulario-publicacao').style.display = 'none'; 
+                document.getElementById('tela-sucesso-publicacao').classList.add('visivel'); 
+                exibirNotificacao('✅ Publicação enviada!', 'sucesso');
+            }, 1500);
+        }
+
+        function reiniciarFormulario() {
+            document.getElementById('texto-publicacao').value = '';       
+            document.getElementById('categoria-publicacao').value = '';   
+            document.getElementById('contador-letras').textContent = '0 / 300 caracteres'; 
+            document.getElementById('formulario-publicacao').style.display = '';           
+            document.getElementById('tela-sucesso-publicacao').classList.remove('visivel'); 
+        }
+
+        function abrirConversa(nome, classeAvatar, emoji) {
+            conversaAberta = nome; 
+            document.getElementById('lista-conversas').style.display = 'none'; 
+            document.getElementById('area-conversa').classList.add('aberta'); 
+            document.getElementById('nome-na-conversa').textContent = nome;   
+
+            var foto = document.getElementById('foto-contato-conversa');
+            foto.className = 'foto-contato ' + classeAvatar; 
+            foto.textContent = emoji;                          
+
+            mostrarMensagens(); 
+        }
+
+        function mostrarMensagens() {
+            var area = document.getElementById('mensagens-conversa'); 
+            var mensagens = historico[conversaAberta] || [];           
+            var html = ''; 
+
+            for (var i = 0; i < mensagens.length; i++) {
+                var m = mensagens[i]; 
+                var lado = m.quem == 'eu' ? 'enviada' : 'recebida'; 
+                var alinhamento = m.quem == 'eu' ? 'right' : 'left'; 
+                html += '<div>';
+                html += '<div class="balao-mensagem ' + lado + '">' + m.texto + '</div>'; 
+                html += '<div class="hora-balao" style="text-align:' + alinhamento + '">' + m.hora + '</div>'; 
+                html += '</div>';
+            }
+
+            area.innerHTML = html; 
+            area.scrollTop = area.scrollHeight; 
+        }
+
+        function enviarMensagem() {
+            var campo = document.getElementById('campo-digitar'); 
+            var texto = campo.value.trim(); 
+
+            if (texto == '') {
+                exibirNotificacao('⚠️ Digite uma mensagem antes de enviar', 'erro'); 
+                return; 
+            }
+
+            var agora = new Date();
+            var horas = agora.getHours().toString().padStart(2, '0');     
+            var minutos = agora.getMinutes().toString().padStart(2, '0'); 
+            var hora = horas + ':' + minutos;                             
+
+            if (!historico[conversaAberta]) {
+                historico[conversaAberta] = [];
+            }
+
+            historico[conversaAberta].push({ quem: 'eu', texto: texto, hora: hora });
+            campo.value = ''; 
+            mostrarMensagens(); 
+        }
+
+        document.getElementById('campo-digitar').addEventListener('keydown', function(e) {
+            if (e.key == 'Enter') { 
+                enviarMensagem();   
+            }
+        });
+
+        function voltarParaLista(mostrar) {
+            if (mostrar == undefined) mostrar = true; 
+            document.getElementById('area-conversa').classList.remove('aberta'); 
+            if (mostrar) {
+                document.getElementById('lista-conversas').style.display = ''; 
+            }
+            conversaAberta = ''; 
+        }
+
+        function sairDaConta() {
+            var confirmar = confirm('Deseja realmente sair da sua conta?'); 
+            if (confirmar) { 
+                mostrarCarregando('Saindo...'); 
+                setTimeout(function() {
+                    esconderCarregando(); 
+                    document.getElementById('barra-topo').style.display = 'none'; 
+                    document.getElementById('barra-nav').style.display = 'none';  
+
+                    var todasTelas = document.querySelectorAll('.tela');
+                    for (var i = 0; i < todasTelas.length; i++) {
+                        todasTelas[i].classList.remove('ativa');
+                    }
+
+                    document.getElementById('tela-login').classList.add('ativa');
+                    document.getElementById('tela-login').style.display = ''; 
+
+                    document.getElementById('campo-usuario').value = '';
+                    document.getElementById('campo-senha').value = '';
+                    document.getElementById('caixa-erro-login').classList.remove('visivel'); 
+
+                }, 1000); 
+            }
+
+        }
