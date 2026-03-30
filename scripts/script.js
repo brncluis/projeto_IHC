@@ -3,7 +3,7 @@ var faixa = document.getElementById('carrossel-faixa');
         faixa.innerHTML = faixa.innerHTML + faixa.innerHTML;
 
         var titulos = {
-            'tela-inicio': 'ConectaVida',
+            'tela-inicio': 'INSSocial',
             'tela-mensagens': 'Mensagens',
             'tela-nova-publicacao': 'Nova Publicação',
             'tela-perfil': 'Meu Perfil'
@@ -137,7 +137,7 @@ var faixa = document.getElementById('carrossel-faixa');
                 botaoNav.classList.add('ativo'); 
             }
 
-            document.getElementById('titulo-topo').textContent = titulos[idTela] || 'ConectaVida';
+            document.getElementById('titulo-topo').textContent = titulos[idTela] || 'INSSocial';
 
             if (idTela == 'tela-inicio') {
                 document.getElementById('campo-pesquisa').style.display = ''; 
@@ -292,27 +292,26 @@ var faixa = document.getElementById('carrossel-faixa');
         }
 
         function sairDaConta() {
-            var confirmar = confirm('Deseja realmente sair da sua conta?'); 
-            if (confirmar) { 
-                mostrarCarregando('Saindo...'); 
-                setTimeout(function() {
-                    esconderCarregando(); 
-                    document.getElementById('barra-topo').style.display = 'none'; 
-                    document.getElementById('barra-nav').style.display = 'none';  
+            document.getElementById('modal-sair').classList.add('aberto');
+        }
 
-                    var todasTelas = document.querySelectorAll('.tela');
-                    for (var i = 0; i < todasTelas.length; i++) {
-                        todasTelas[i].classList.remove('ativa');
-                    }
+        function confirmarSaida() {
+            document.getElementById('modal-sair').classList.remove('aberto');
+            mostrarCarregando('Saindo...');
+            setTimeout(function() {
+                esconderCarregando();
+                document.getElementById('barra-topo').style.display = 'none';
+                document.getElementById('barra-nav').style.display = 'none';
 
-                    document.getElementById('tela-login').classList.add('ativa');
-                    document.getElementById('tela-login').style.display = ''; 
+                var todasTelas = document.querySelectorAll('.tela');
+                for (var i = 0; i < todasTelas.length; i++) {
+                    todasTelas[i].classList.remove('ativa');
+                }
 
-                    document.getElementById('campo-usuario').value = '';
-                    document.getElementById('campo-senha').value = '';
-                    document.getElementById('caixa-erro-login').classList.remove('visivel'); 
-
-                }, 1000); 
-            }
-
+                document.getElementById('tela-login').classList.add('ativa');
+                document.getElementById('tela-login').style.display = 'flex';
+                document.getElementById('campo-usuario').value = '';
+                document.getElementById('campo-senha').value = '';
+                document.getElementById('caixa-erro-login').classList.remove('visivel');
+            }, 1000);
         }

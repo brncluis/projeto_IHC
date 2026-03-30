@@ -249,11 +249,16 @@
 
         .formulario-login {
 
-            width: 100%;            
-            max-width: 380px;       
-            display: flex;          
-            flex-direction: column; 
-            gap: 14px;              
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: var(--cor-branco);   /* fundo branco = cria a "caixa" */
+            padding: 28px 24px;              /* espaço interno generoso */
+            border-radius: 4px 16px 16px 16px; /* canto reto no topo-esquerdo */
+            box-shadow: var(--sombra-forte); /* sombra que destaca do fundo */
+            border-top: 4px solid var(--cor-verde); /* faixa verde no topo */           
         }
 
         .rotulo-campo {

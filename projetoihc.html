@@ -8,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ConectaVida</title>
+    <title>INSSocial</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
@@ -46,10 +46,23 @@
         </div>
     </div>
 
+    <div class="fundo-modal" id="modal-sair">
+        <div class="caixa-modal">
+            <div class="modal-titulo">🚪 Sair da conta?</div>
+            <div class="modal-texto">
+                Tem certeza que deseja sair? Você precisará entrar novamente para acessar o INCSSocial.
+            </div>
+            <div class="modal-botoes">
+                <button class="botao-fechar-modal" onclick="document.getElementById('modal-sair').classList.remove('aberto')">Cancelar</button>
+                <button class="botao-confirmar-modal" onclick="confirmarSaida()">Sair</button>
+            </div>
+        </div>
+    </div>
+
     <header class="barra-topo" id="barra-topo" style="display:none;">
         <span class="barra-topo-logo">🌿</span>
 
-        <span class="barra-topo-titulo" id="titulo-topo">ConectaVida</span>
+        <span class="barra-topo-titulo" id="titulo-topo">INSSocial</span>
 
         <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
 
@@ -58,7 +71,7 @@
     <div class="tela ativa" id="tela-login" style="margin-top:0;">
         <div class="login-logo">🌿</div>
 
-        <div class="login-nome-app">ConectaVida</div>
+        <div class="login-nome-app">INSSocial</div>
 
         <div class="login-subtitulo">Conectando pessoas com carinho ✨</div>
 
