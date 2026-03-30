@@ -1197,3 +1197,18 @@
             font-weight: 800;               
             cursor: pointer;                
         }
+
+        /* ===== LOGO ===== */
+
+        .barra-topo-logo-img {
+            width: 90px;
+            height: 75px;
+            object-fit: contain;
+        }
+
+        .login-logo img {
+            width: 90px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }

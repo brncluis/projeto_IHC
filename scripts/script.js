@@ -3,7 +3,7 @@ var faixa = document.getElementById('carrossel-faixa');
         faixa.innerHTML = faixa.innerHTML + faixa.innerHTML;
 
         var titulos = {
-            'tela-inicio': 'INSSocial',
+            'tela-inicio': 'Aposentela',
             'tela-mensagens': 'Mensagens',
             'tela-nova-publicacao': 'Nova Publicação',
             'tela-perfil': 'Meu Perfil'
@@ -137,7 +137,7 @@ var faixa = document.getElementById('carrossel-faixa');
                 botaoNav.classList.add('ativo'); 
             }
 
-            document.getElementById('titulo-topo').textContent = titulos[idTela] || 'INSSocial';
+            document.getElementById('titulo-topo').textContent = titulos[idTela] || 'Aposentela';
 
             if (idTela == 'tela-inicio') {
                 document.getElementById('campo-pesquisa').style.display = ''; 
