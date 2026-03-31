@@ -3,30 +3,30 @@ var faixa = document.getElementById('carrossel-faixa');
         faixa.innerHTML = faixa.innerHTML + faixa.innerHTML;
 
         var titulos = {
-            'tela-inicio': 'ConectaVida',
+            'tela-inicio': 'Aposentela',
             'tela-mensagens': 'Mensagens',
             'tela-nova-publicacao': 'Nova Publicação',
             'tela-perfil': 'Meu Perfil'
         };
 
         var historico = {
-            'Maria das Graças': [
-                { quem: 'eles', texto: 'Olá! Vi sua publicação sobre caminhada 😊', hora: '14:20' },
+            'Graças': [
+                { quem: 'eles', texto: 'Olá amiga', hora: '14:20' },
 
-                { quem: 'eu',   texto: 'Que bom! Tem me ajudado muito!', hora: '14:25' },
-                { quem: 'eles', texto: 'Boa tarde! Vi sua publicação sobre caminhada 😊', hora: '14:32' }
+                { quem: 'eu',   texto: 'Oi amiguxa', hora: '14:25' },
+                { quem: 'eles', texto: 'Saudades', hora: '14:32' }
             ],
             'José Roberto': [
-                { quem: 'eu',   texto: 'Vou ao evento no parque no sábado!', hora: '10:50' },
-                { quem: 'eles', texto: 'Ótimo! Vai ser muito bom 🎵', hora: '11:00' },
-                { quem: 'eles', texto: 'Até sábado então! Vai ser ótimo 🎵', hora: '11:05' }
+                { quem: 'eu',   texto: 'Vou no evento', hora: '10:50' },
+                { quem: 'eles', texto: 'Legal', hora: '11:00' },
+                { quem: 'eles', texto: 'Até lá', hora: '11:05' }
             ],
             'Tereza Aparecida': [
-                { quem: 'eu',   texto: 'Adorei a ideia da sopa! Pode me mandar a receita?', hora: 'Ontem' },
-                { quem: 'eles', texto: 'Claro! Vou te mandar a receita completa, espera! 🍲', hora: 'Ontem' }
+                { quem: 'eu',   texto: 'Pode me mandar a receita?', hora: 'Ontem' },
+                { quem: 'eles', texto: 'Vou te mandar a receita', hora: 'Ontem' }
             ],
             'Antônio Carlos': [
-                { quem: 'eles', texto: 'Tudo bem por aí? Faz tempo que não nos falamos', hora: 'Segunda' }
+                { quem: 'eles', texto: 'Tudo bem por ai?', hora: 'Segunda' }
             ]
         };
 
@@ -137,7 +137,7 @@ var faixa = document.getElementById('carrossel-faixa');
                 botaoNav.classList.add('ativo'); 
             }
 
-            document.getElementById('titulo-topo').textContent = titulos[idTela] || 'ConectaVida';
+            document.getElementById('titulo-topo').textContent = titulos[idTela] || 'Aposentela';
 
             if (idTela == 'tela-inicio') {
                 document.getElementById('campo-pesquisa').style.display = ''; 
@@ -292,27 +292,26 @@ var faixa = document.getElementById('carrossel-faixa');
         }
 
         function sairDaConta() {
-            var confirmar = confirm('Deseja realmente sair da sua conta?'); 
-            if (confirmar) { 
-                mostrarCarregando('Saindo...'); 
-                setTimeout(function() {
-                    esconderCarregando(); 
-                    document.getElementById('barra-topo').style.display = 'none'; 
-                    document.getElementById('barra-nav').style.display = 'none';  
+            document.getElementById('modal-sair').classList.add('aberto');
+        }
 
-                    var todasTelas = document.querySelectorAll('.tela');
-                    for (var i = 0; i < todasTelas.length; i++) {
-                        todasTelas[i].classList.remove('ativa');
-                    }
+        function confirmarSaida() {
+            document.getElementById('modal-sair').classList.remove('aberto');
+            mostrarCarregando('Saindo...');
+            setTimeout(function() {
+                esconderCarregando();
+                document.getElementById('barra-topo').style.display = 'none';
+                document.getElementById('barra-nav').style.display = 'none';
 
-                    document.getElementById('tela-login').classList.add('ativa');
-                    document.getElementById('tela-login').style.display = ''; 
+                var todasTelas = document.querySelectorAll('.tela');
+                for (var i = 0; i < todasTelas.length; i++) {
+                    todasTelas[i].classList.remove('ativa');
+                }
 
-                    document.getElementById('campo-usuario').value = '';
-                    document.getElementById('campo-senha').value = '';
-                    document.getElementById('caixa-erro-login').classList.remove('visivel'); 
-
-                }, 1000); 
-            }
-
+                document.getElementById('tela-login').classList.add('ativa');
+                document.getElementById('tela-login').style.display = 'flex';
+                document.getElementById('campo-usuario').value = '';
+                document.getElementById('campo-senha').value = '';
+                document.getElementById('caixa-erro-login').classList.remove('visivel');
+            }, 1000);
         }
