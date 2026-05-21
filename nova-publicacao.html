@@ -5,74 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aposentela – Nova Publicação</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/novapubli.css">
 </head>
 <body>
 
     <div class="tela-carregando" id="tela-carregando">
         <div class="icone-girando"></div>
-        <div class="texto-carregando" id="texto-carregando">Carregando...</div>
+        <div class="texto-carregando">Carregando...</div>
     </div>
 
     <div class="notificacao" id="notificacao"></div>
 
     <!-- Barra de Topo -->
-    <header class="barra-topo" id="barra-topo">
+    <header class="barra-topo">
         <img src="assets/logo.png" class="barra-topo-logo-img" alt="Logo">
         <span class="barra-topo-titulo">Nova Publicação</span>
-        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
+        <input class="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
     </header>
 
-    <!-- Tela: Nova Publicação -->
     <div class="tela ativa" id="tela-nova-publicacao">
+
+        <!-- 4. Orientação de tela -->
+        <div class="rotulo-orientacao">
+            <div class="rotulo-orientacao-titulo">✏️ Nova Publicação</div>
+            <div class="rotulo-orientacao-sub">Escreva algo e compartilhe com seus amigos.</div>
+        </div>
 
         <div class="formulario-publicacao" id="formulario-publicacao">
 
             <div class="autor-publicacao">
                 <div class="foto-autor">
-                    <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                    <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                 </div>
                 <div class="nome-autor">Carlos Eduardo</div>
             </div>
 
+            <!-- 8. Dica tranquilizadora antes do campo -->
+            <div class="dica-tranquilizadora">
+                💡 Fique tranquilo! Você pode apagar sua publicação depois, quando quiser.
+            </div>
+
             <div>
                 <label class="rotulo-campo">📝 O que você quer compartilhar?</label>
-                <textarea class="campo-grande" id="texto-publicacao" placeholder="Escreva aqui sua publicação..." maxlength="300" oninput="atualizarContador()"></textarea>
+                <textarea class="campo-grande" id="texto-publicacao"
+                    placeholder="Escreva aqui — um momento especial, uma dica, uma receita, um recado para os amigos..."
+                    maxlength="300" oninput="atualizarContador()"></textarea>
                 <div class="contador-letras" id="contador-letras">0 / 300 caracteres</div>
                 <div class="mensagem-erro-campo" id="erro-texto-publicacao">⚠️ Escreva algo antes de publicar.</div>
             </div>
 
             <div>
-                <label class="rotulo-campo">🏷️ Categoria</label>
+                <label class="rotulo-campo">🏷️ Qual é o assunto?</label>
                 <select class="campo-selecao" id="categoria-publicacao">
-                    <option value="">— Escolha uma categoria —</option>
-                    <option value="saude">🌱 Saúde</option>
-                    <option value="evento">🎉 Evento</option>
-                    <option value="dica">📚 Dica</option>
-                    <option value="alimentacao">🍎 Alimentação</option>
-                    <option value="casa">🏡 Casa</option>
+                    <option value="">— Escolha o assunto —</option>
+                    <option value="saude">🌱 Saúde e bem-estar</option>
+                    <option value="evento">🎉 Evento ou passeio</option>
+                    <option value="dica">📚 Dica útil</option>
+                    <option value="alimentacao">🍎 Alimentação e receitas</option>
+                    <option value="casa">🏡 Casa e família</option>
                     <option value="comunidade">🤝 Comunidade</option>
                 </select>
-                <div class="mensagem-erro-campo" id="erro-categoria-publicacao">⚠️ Escolha uma categoria.</div>
+                <div class="mensagem-erro-campo" id="erro-categoria-publicacao">⚠️ Escolha o assunto da publicação.</div>
             </div>
 
-            <button class="botao-principal" onclick="publicar()">📢 Publicar</button>
-
-            <button class="botao-secundario" onclick="window.location.href='inicio.html'">Cancelar</button>
+            <button class="botao-principal" onclick="publicar()">📢 Publicar agora</button>
+            <button class="botao-secundario" onclick="window.location.href='inicio.html'">← Voltar sem publicar</button>
         </div>
 
-        <!-- Estado de sucesso após publicar -->
+        <!-- 7. Tela de sucesso com feedback forte e animação -->
         <div class="tela-sucesso-publicacao" id="tela-sucesso-publicacao">
-            <div class="icone-sucesso">✅</div>
+            <div class="icone-sucesso-grande">✅</div>
             <div class="titulo-sucesso">Publicado com sucesso!</div>
-            <div class="texto-sucesso">Sua publicação já está visível para seus amigos.</div>
-            <button class="botao-principal" style="max-width:300px;" onclick="window.location.href='inicio.html'">🏠 Voltar ao Início</button>
-            <button class="botao-secundario" onclick="reiniciarFormulario()">✏️ Fazer outra publicação</button>
+            <div class="caixa-confirmacao">
+                ✔️ Sua publicação já está visível para todos os seus amigos no Aposentela.
+            </div>
+            <div class="texto-sucesso">Se quiser apagar ou editar, acesse o seu perfil.</div>
+            <div class="acoes-sucesso">
+                <button class="botao-principal" style="max-width:320px;" onclick="window.location.href='inicio.html'">
+                    🏠 Voltar ao Início
+                </button>
+
+                <button class="botao-secundario" onclick="reiniciarFormulario()">
+                    ✏️ Fazer outra publicação
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Barra de Navegação -->
-    <nav class="barra-nav" id="barra-nav">
+    <nav class="barra-nav">
         <a href="inicio.html">
             <span class="icone-nav">🏠</span> Início
         </a>
@@ -80,7 +100,7 @@
             <span class="icone-nav">💬</span> Mensagens
         </a>
         <a href="perfil.html">
-            <span class="icone-nav">👤</span> Perfil
+            <span class="icone-nav">👤</span> Meu Perfil
         </a>
     </nav>
 

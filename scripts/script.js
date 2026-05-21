@@ -1,13 +1,83 @@
-// =============================================
-// APOSENTELA – script.js (multi-página)
-// =============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const icone    = document.getElementById('icone-saudacao');
+    const saudacao = document.getElementById('texto-saudacao');
+    const contexto = document.getElementById('texto-contexto');
+    if (!saudacao) return;
 
-// ---------------------------
-// Navegação entre páginas
-// ---------------------------
-// Antes: irParaTela('tela-inicio', el)
-// Agora: use window.location.href diretamente no HTML,
-// ou chame irParaTela() que faz o redirecionamento.
+    const hora = new Date().getHours();
+    if (hora >= 5 && hora < 12) {
+        if (icone) icone.textContent = '☀️';
+        saudacao.textContent = 'Bom dia, Carlos! ☀️';
+        if (contexto) contexto.textContent = 'Veja o que seus amigos compartilharam esta manhã 💚';
+    } else if (hora >= 12 && hora < 18) {
+        if (icone) icone.textContent = '🌤️';
+        saudacao.textContent = 'Boa tarde, Carlos! 🌤️';
+        if (contexto) contexto.textContent = 'Veja o que seus amigos compartilharam hoje 💚';
+    } else {
+        if (icone) icone.textContent = '🌙';
+        saudacao.textContent = 'Boa noite, Carlos! 🌙';
+        if (contexto) contexto.textContent = 'Veja o que seus amigos compartilharam hoje 💚';
+    }
+});
+
+let nivelFonte = 0;
+
+function alternarFonteGrande() {
+
+    document.body.classList.remove('fonte-grande', 'fonte-muito-grande');
+
+    nivelFonte = (nivelFonte + 1) % 3;
+
+    if (nivelFonte === 1) {
+        document.body.classList.add('fonte-grande');
+    }
+
+    if (nivelFonte === 2) {
+        document.body.classList.add('fonte-muito-grande');
+    }
+
+    localStorage.setItem('nivelFonte', nivelFonte);
+
+    const btn = document.getElementById('btn-fonte');
+
+    if (btn) {
+        btn.classList.toggle('ativo', nivelFonte > 0);
+    }
+}
+
+// 10. Acessibilidade: Alto contraste
+function alternarAltoContraste() {
+    document.body.classList.toggle('alto-contraste');
+    const btn = document.getElementById('btn-contraste');
+    if (btn) btn.classList.add('ativo');
+    localStorage.setItem('altoContraste', document.body.classList.contains('alto-contraste'));
+}
+
+// Restaura preferências ao carregar qualquer página
+document.addEventListener('DOMContentLoaded', () => {
+    const fonteSalva = parseInt(localStorage.getItem('nivelFonte')) || 0;
+
+    nivelFonte = fonteSalva;
+
+    if (nivelFonte === 1) {
+        document.body.classList.add('fonte-grande');
+    }
+
+    if (nivelFonte === 2) {
+        document.body.classList.add('fonte-muito-grande');
+    }
+
+    const btn = document.getElementById('btn-fonte');
+
+    if (btn && nivelFonte > 0) {
+        btn.classList.add('ativo');
+    }
+    if (localStorage.getItem('altoContraste') === 'true') {
+        document.body.classList.add('alto-contraste');
+        const btn = document.getElementById('btn-contraste');
+        if (btn) btn.classList.add('ativo');
+    }
+});
 
 const mapaDeRotas = {
     'tela-inicio':            'inicio.html',
@@ -24,9 +94,7 @@ function irParaTela(idTela, elNav) {
     }
 }
 
-// ---------------------------
 // Tela de Carregamento
-// ---------------------------
 function mostrarCarregando(texto) {
     const tela = document.getElementById('tela-carregando');
     const textoEl = document.getElementById('texto-carregando');
@@ -41,9 +109,7 @@ function ocultarCarregando() {
     if (tela) tela.classList.remove('ativa');
 }
 
-// ---------------------------
 // Notificações
-// ---------------------------
 function exibirNotificacao(mensagem, tipo) {
     const notif = document.getElementById('notificacao');
     if (!notif) return;
@@ -52,16 +118,13 @@ function exibirNotificacao(mensagem, tipo) {
     setTimeout(() => notif.classList.remove('visivel'), 3000);
 }
 
-// ---------------------------
 // Modais
-// ---------------------------
 function fecharModal() {
     document.querySelectorAll('.fundo-modal').forEach(m => m.classList.remove('aberto'));
 }
 
-// ---------------------------
 // LOGIN (index.html)
-// ---------------------------
+
 function fazerLogin() {
     const usuario = document.getElementById('campo-usuario')?.value.trim();
     const senha   = document.getElementById('campo-senha')?.value.trim();
@@ -106,9 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ---------------------------
 // SAIR DA CONTA
-// ---------------------------
 function sairDaConta() {
     const modal = document.getElementById('modal-sair');
     if (modal) modal.classList.add('aberto');
@@ -122,9 +183,7 @@ function confirmarSaida() {
     }, 800);
 }
 
-// ---------------------------
 // NOVA PUBLICAÇÃO (nova-publicacao.html)
-// ---------------------------
 function atualizarContador() {
     const campo    = document.getElementById('texto-publicacao');
     const contador = document.getElementById('contador-letras');
@@ -175,25 +234,39 @@ function reiniciarFormulario() {
     atualizarContador();
 }
 
-// ---------------------------
-// CURTIR
-// ---------------------------
 function curtir(btn) {
+
     const contador = btn.querySelector('.contador-curtidas');
+
     if (!contador) return;
 
+    let numero = parseInt(contador.textContent);
+
     if (btn.classList.contains('curtido')) {
+
         btn.classList.remove('curtido');
-        contador.textContent = parseInt(contador.textContent) - 1;
+
+        contador.textContent = numero - 1;
+
     } else {
+
         btn.classList.add('curtido');
-        contador.textContent = parseInt(contador.textContent) + 1;
+
+        contador.textContent = numero + 1;
+
+        btn.animate(
+            [
+                { transform: 'scale(1)' },
+                { transform: 'scale(1.18)' },
+                { transform: 'scale(1)' }
+            ],
+            {
+                duration: 300
+            }
+        );
     }
 }
-
-// ---------------------------
 // MENSAGENS (mensagens.html)
-// ---------------------------
 const historicoConversas = {
     'Graças':         [{ de: 'outro', texto: 'Boa tarde!' }],
     'Zézin':          [{ de: 'outro', texto: 'Forró hoje cuida 🎶' }],
@@ -272,3 +345,5 @@ function enviarMensagem() {
     campo.value = '';
     renderizarMensagens();
 }
+
+document.addEventListener('DOMContentLoaded', ocultarCarregando);
