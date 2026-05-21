@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aposentela – Nova Publicação</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <div class="tela-carregando" id="tela-carregando">
+        <div class="icone-girando"></div>
+        <div class="texto-carregando" id="texto-carregando">Carregando...</div>
+    </div>
+
+    <div class="notificacao" id="notificacao"></div>
+
+    <!-- Barra de Topo -->
+    <header class="barra-topo" id="barra-topo">
+        <img src="assets/logo.png" class="barra-topo-logo-img" alt="Logo">
+        <span class="barra-topo-titulo">Nova Publicação</span>
+        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
+    </header>
+
+    <!-- Tela: Nova Publicação -->
+    <div class="tela ativa" id="tela-nova-publicacao">
+
+        <div class="formulario-publicacao" id="formulario-publicacao">
+
+            <div class="autor-publicacao">
+                <div class="foto-autor">
+                    <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                </div>
+                <div class="nome-autor">Carlos Eduardo</div>
+            </div>
+
+            <div>
+                <label class="rotulo-campo">📝 O que você quer compartilhar?</label>
+                <textarea class="campo-grande" id="texto-publicacao" placeholder="Escreva aqui sua publicação..." maxlength="300" oninput="atualizarContador()"></textarea>
+                <div class="contador-letras" id="contador-letras">0 / 300 caracteres</div>
+                <div class="mensagem-erro-campo" id="erro-texto-publicacao">⚠️ Escreva algo antes de publicar.</div>
+            </div>
+
+            <div>
+                <label class="rotulo-campo">🏷️ Categoria</label>
+                <select class="campo-selecao" id="categoria-publicacao">
+                    <option value="">— Escolha uma categoria —</option>
+                    <option value="saude">🌱 Saúde</option>
+                    <option value="evento">🎉 Evento</option>
+                    <option value="dica">📚 Dica</option>
+                    <option value="alimentacao">🍎 Alimentação</option>
+                    <option value="casa">🏡 Casa</option>
+                    <option value="comunidade">🤝 Comunidade</option>
+                </select>
+                <div class="mensagem-erro-campo" id="erro-categoria-publicacao">⚠️ Escolha uma categoria.</div>
+            </div>
+
+            <button class="botao-principal" onclick="publicar()">📢 Publicar</button>
+
+            <button class="botao-secundario" onclick="window.location.href='inicio.html'">Cancelar</button>
+        </div>
+
+        <!-- Estado de sucesso após publicar -->
+        <div class="tela-sucesso-publicacao" id="tela-sucesso-publicacao">
+            <div class="icone-sucesso">✅</div>
+            <div class="titulo-sucesso">Publicado com sucesso!</div>
+            <div class="texto-sucesso">Sua publicação já está visível para seus amigos.</div>
+            <button class="botao-principal" style="max-width:300px;" onclick="window.location.href='inicio.html'">🏠 Voltar ao Início</button>
+            <button class="botao-secundario" onclick="reiniciarFormulario()">✏️ Fazer outra publicação</button>
+        </div>
+    </div>
+
+    <!-- Barra de Navegação -->
+    <nav class="barra-nav" id="barra-nav">
+        <a href="inicio.html">
+            <span class="icone-nav">🏠</span> Início
+        </a>
+        <a href="mensagens.html">
+            <span class="icone-nav">💬</span> Mensagens
+        </a>
+        <a href="perfil.html">
+            <span class="icone-nav">👤</span> Perfil
+        </a>
+    </nav>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>
