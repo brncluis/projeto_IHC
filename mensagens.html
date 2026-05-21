@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aposentela – Mensagens</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <div class="tela-carregando" id="tela-carregando">
+        <div class="icone-girando"></div>
+        <div class="texto-carregando" id="texto-carregando">Carregando...</div>
+    </div>
+
+    <div class="notificacao" id="notificacao"></div>
+
+    <!-- Barra de Topo -->
+    <header class="barra-topo" id="barra-topo">
+        <img src="assets/logo.png" class="barra-topo-logo-img" alt="Logo">
+        <span class="barra-topo-titulo">Mensagens</span>
+        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
+    </header>
+
+    <!-- Tela: Mensagens -->
+    <div class="tela ativa" id="tela-mensagens">
+
+        <!-- Lista de conversas -->
+        <div class="lista-conversas" id="lista-conversas">
+
+            <div class="item-conversa" onclick="abrirConversa('Graças', 'foto-contato-amarelo', '👩‍🦳')">
+                <div class="foto-contato foto-contato-amarelo">
+                    <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                </div>
+                <div class="info-conversa">
+                    <div class="nome-contato">Graças</div>
+                    <div class="previa-mensagem nao-lida">Boa tarde</div>
+                </div>
+                <div class="lado-direito-conversa">
+                    <span class="hora-mensagem">14:32</span>
+                    <span class="bolinha-nao-lida">1</span>
+                </div>
+            </div>
+
+            <div class="item-conversa" onclick="abrirConversa('Zézin', 'foto-contato-verde', '👴')">
+                <div class="foto-contato foto-contato-verde">
+                    <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                </div>
+                <div class="info-conversa">
+                    <div class="nome-contato">Zézin</div>
+                    <div class="previa-mensagem">Forró hoje cuida</div>
+                </div>
+                <div class="lado-direito-conversa">
+                    <span class="hora-mensagem">11:05</span>
+                </div>
+            </div>
+
+            <div class="item-conversa" onclick="abrirConversa('Dona Tereza', 'foto-contato-azul', '')">
+                <div class="foto-contato foto-contato-azul">
+                    <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                </div>
+                <div class="info-conversa">
+                    <div class="nome-contato">Dona Tereza</div>
+                    <div class="previa-mensagem nao-lida">Vou te mandar a receita</div>
+                </div>
+                <div class="lado-direito-conversa">
+                    <span class="hora-mensagem">Ontem</span>
+                    <span class="bolinha-nao-lida">1</span>
+                </div>
+            </div>
+
+            <div class="item-conversa" onclick="abrirConversa('Antônio Carlos', 'foto-contato-rosa', '👨‍🦲')">
+                <div class="foto-contato foto-contato-rosa">
+                    <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                </div>
+                <div class="info-conversa">
+                    <div class="nome-contato">Antônio Carlos</div>
+                    <div class="previa-mensagem">Tudo bem por aí?</div>
+                </div>
+                <div class="lado-direito-conversa">
+                    <span class="hora-mensagem">Segunda</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Área de conversa aberta -->
+        <div class="area-conversa" id="area-conversa">
+            <div class="cabecalho-conversa">
+                <button class="botao-voltar" onclick="voltarParaLista()">◀</button>
+                <div class="foto-contato" id="foto-contato-conversa" style="width:46px; height:46px; font-size:1.4rem;"></div>
+                <div>
+                    <div class="nome-na-conversa" id="nome-na-conversa"></div>
+                    <div class="status-online">● Online</div>
+                </div>
+            </div>
+            <div class="mensagens-conversa" id="mensagens-conversa"></div>
+            <div class="barra-digitar">
+                <input class="campo-digitar" id="campo-digitar" type="text" placeholder="Digite sua mensagem...">
+                <button class="botao-enviar" onclick="enviarMensagem()">➤</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Barra de Navegação -->
+    <nav class="barra-nav" id="barra-nav">
+        <a href="inicio.html">
+            <span class="icone-nav">🏠</span> Início
+        </a>
+        <a href="mensagens.html" class="ativo">
+            <span class="icone-nav">💬</span> Mensagens
+        </a>
+        <a href="perfil.html">
+            <span class="icone-nav">👤</span> Perfil
+        </a>
+    </nav>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>

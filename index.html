@@ -1,80 +1,45 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Aposentela</title>
-
+    <title>Aposentela – Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="styles/style.css">
+    <meta http-equiv="refresh" content="0; url=inicio.html">
 </head>
-
 <body>
 
     <div class="tela-carregando" id="tela-carregando">
         <div class="icone-girando"></div>
-
         <div class="texto-carregando" id="texto-carregando">Carregando...</div>
-
     </div>
 
     <div class="notificacao" id="notificacao"></div>
 
+    <!-- Modal: Esqueci a senha -->
     <div class="fundo-modal" id="modal-senha">
         <div class="caixa-modal">
             <div class="modal-titulo">🔑 Esqueceu a senha?</div>
-
             <div class="modal-texto">
-
                 Entre em contato com um familiar ou responsável para recuperar o acesso à sua conta.
                 <br><br>
                 Você também pode ligar para nossa central: <strong>(81) 3000-0000</strong>
-
             </div>
             <div class="modal-botoes">
-
                 <button class="botao-fechar-modal" onclick="fecharModal()">Fechar</button>
-
                 <button class="botao-confirmar-modal" onclick="fecharModal(); exibirNotificacao('✅ Ajuda enviada ao familiar!', 'sucesso')">Avisar Familiar</button>
             </div>
         </div>
     </div>
 
-    <div class="fundo-modal" id="modal-sair">
-        <div class="caixa-modal">
-            <div class="modal-titulo">🚪 Sair da conta?</div>
-            <div class="modal-texto">
-                Tem certeza que deseja sair? Você precisará entrar novamente para acessar o Aposentela.
-            </div>
-            <div class="modal-botoes">
-                <button class="botao-fechar-modal" onclick="document.getElementById('modal-sair').classList.remove('aberto')">Cancelar</button>
-                <button class="botao-confirmar-modal" onclick="confirmarSaida()">Sair</button>
-            </div>
-        </div>
-    </div>
-
-    <header class="barra-topo" id="barra-topo" style="display:none;">
-        <img src="assets/logo.png" class="barra-topo-logo-img" alt="Logo">
-
-        <span class="barra-topo-titulo" id="titulo-topo">Aposentela</span>
-
-        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
-
-    </header>
-
+    <!-- Tela de Login -->
     <div class="tela ativa" id="tela-login" style="margin-top:0;">
         <div class="login-logo">
             <img src="assets/logo.png" alt="Logo">
         </div>
 
         <div class="login-nome-app">Aposentela</div>
-
         <div class="login-subtitulo">Conectando pessoas com carinho ✨</div>
 
         <div class="formulario-login">
@@ -82,7 +47,6 @@
             <div class="caixa-erro-login" id="caixa-erro-login">
                 ⚠️ Usuário ou senha incorretos. Verifique os dados e tente novamente.
                 <br>
-
                 <button class="botao-recuperar-senha" onclick="document.getElementById('modal-senha').classList.add('aberto')">
                     🔑 Esqueci minha senha
                 </button>
@@ -90,27 +54,20 @@
 
             <div>
                 <label class="rotulo-campo" for="campo-usuario">👤 Usuário</label>
-
                 <input class="campo-texto" id="campo-usuario" type="text" placeholder="Digite seu nome de usuário">
-
                 <div class="mensagem-erro-campo" id="erro-usuario">⚠️ Por favor, preencha o usuário.</div>
-
             </div>
 
             <div>
                 <label class="rotulo-campo" for="campo-senha">🔒 Senha</label>
-
                 <input class="campo-texto" id="campo-senha" type="password" placeholder="Digite sua senha">
-
                 <div class="mensagem-erro-campo" id="erro-senha">⚠️ Por favor, preencha a senha.</div>
-
             </div>
 
             <button class="botao-principal" id="botao-entrar" onclick="fazerLogin()">Entrar</button>
 
             <div class="link-esqueci-senha" onclick="document.getElementById('modal-senha').classList.add('aberto')">
                 Esqueci minha senha
-
             </div>
 
             <div style="font-size:0.88rem; font-weight:700; color:var(--cor-cinza); text-align:center; margin-top:4px;">
@@ -119,343 +76,6 @@
         </div>
     </div>
 
-    <div class="tela" id="tela-inicio">
-
-        <div class="carrossel-container">
-            <div class="carrossel-faixa" id="carrossel-faixa">
-
-                <div class="item-categoria"><span class="icone-categoria">📰</span> Tudo</div>
-                <div class="item-categoria"><span class="icone-categoria">🌱</span> Saúde</div>
-                <div class="item-categoria"><span class="icone-categoria">🎉</span> Eventos</div>
-                <div class="item-categoria"><span class="icone-categoria">📚</span> Dicas</div>
-                <div class="item-categoria"><span class="icone-categoria">🍎</span> Alimentação</div>
-                <div class="item-categoria"><span class="icone-categoria">🏡</span> Casa</div>
-                <div class="item-categoria"><span class="icone-categoria">💊</span> Remédios</div>
-                <div class="item-categoria"><span class="icone-categoria">🤝</span> Comunidade</div>
-
-            </div>
-        </div>
-
-        <button class="botao-nova-publicacao" onclick="irParaTela('tela-nova-publicacao', null)">
-            ✏️ O que você quer compartilhar hoje?
-
-        </button>
-
-        <div class="lista-publicacoes">
-
-            <div class="publicacao">
-                <div class="publicacao-cabecalho">
-
-                    <div class="foto-perfil foto-perfil-amarelo">
-                        <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
-
-                    </div>
-                    <div class="publicacao-info">
-                        <div class="publicacao-autor">Maria Luzia</div>
-                        <div class="publicacao-tempo">🕐 Há 2 horas</div>
-                    </div>
-                    <span class="publicacao-categoria">Saúde</span>
-
-                </div>
-
-                <div class="publicacao-imagem fundo-verde-claro">
-                    <img src="assets/idosacaminhando.png" style="width:100%; height:auto; display:block;">
-                </div>
-                <div class="publicacao-conteudo">
-                    <div class="publicacao-titulo">Caminhada matinal</div>
-                    <div class="publicacao-texto">Convido as amigas a uma caminhada</div>
-                </div>
-                <div class="publicacao-botoes">
-
-                    <button class="botao-acao" onclick="curtir(this)"><span class="icone-botao">❤️</span> <span class="contador-curtidas">24</span></button>
-                    <button class="botao-acao"><span class="icone-botao">💬</span> Comentar</button>
-                    <button class="botao-acao"><span class="icone-botao">↗️</span> Compartilhar</button>
-                </div>
-            </div>
-
-            <div class="publicacao">
-                <div class="publicacao-cabecalho">
-
-                    <div class="foto-perfil foto-perfil-verde">
-                        <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
-                    </div>
-                    <div class="publicacao-info">
-                        <div class="publicacao-autor">Seu Zé</div>
-                        <div class="publicacao-tempo">🕐 Há 5 horas</div>
-                    </div>
-                    <span class="publicacao-categoria">Evento</span>
-                </div>
-
-                <div class="publicacao-imagem fundo-azul-claro">🎵</div>
-                <div class="publicacao-conteudo">
-                    <div class="publicacao-titulo">Arrocha do bom🎶</div>
-                    <div class="publicacao-texto">Forro top</div>
-                </div>
-                <div class="publicacao-botoes">
-                    <button class="botao-acao" onclick="curtir(this)"><span class="icone-botao">❤️</span> <span class="contador-curtidas">57</span></button>
-                    <button class="botao-acao"><span class="icone-botao">💬</span> Comentar</button>
-                    <button class="botao-acao"><span class="icone-botao">↗️</span> Compartilhar</button>
-                </div>
-            </div>
-
-            <div class="publicacao">
-                <div class="publicacao-cabecalho">
-                    <div class="foto-perfil foto-perfil-azul">
-                        <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
-                    </div>
-                    <div class="publicacao-info">
-                        <div class="publicacao-autor">Dona Tereza</div>
-                        <div class="publicacao-tempo">🕐 Ontem</div>
-                    </div>
-                    <span class="publicacao-categoria">Receita</span>
-                </div>
-                <div class="publicacao-imagem fundo-amarelo-claro">🍲</div>
-                <div class="publicacao-conteudo">
-                    <div class="publicacao-titulo">Sopinha a tarde</div>
-                    <div class="publicacao-texto">Receita de familia🍵</div>
-                </div>
-                <div class="publicacao-botoes">
-                    <button class="botao-acao" onclick="curtir(this)"><span class="icone-botao">❤️</span> <span class="contador-curtidas">38</span></button>
-                    <button class="botao-acao"><span class="icone-botao">💬</span> Comentar</button>
-                    <button class="botao-acao"><span class="icone-botao">↗️</span> Compartilhar</button>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="tela" id="tela-nova-publicacao">
-
-        <div class="formulario-publicacao" id="formulario-publicacao">
-
-            <div class="autor-publicacao">
-                <div class="foto-autor">
-                    <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
-                </div>
-
-                <div class="nome-autor">Carlos Eduardo</div>
-
-            </div>
-
-            <div>
-                <label class="rotulo-campo">📝 O que você quer compartilhar?</label>
-
-                <textarea class="campo-grande" id="texto-publicacao" placeholder="Escreva aqui sua publicação..." maxlength="300" oninput="atualizarContador()"></textarea>
-
-                <div class="contador-letras" id="contador-letras">0 / 300 caracteres</div>
-
-                <div class="mensagem-erro-campo" id="erro-texto-publicacao">⚠️ Escreva algo antes de publicar.</div>
-
-            </div>
-
-            <div>
-                <label class="rotulo-campo">🏷️ Categoria</label>
-                <select class="campo-selecao" id="categoria-publicacao">
-
-                    <option value="">— Escolha uma categoria —</option>
-                    <option value="saude">🌱 Saúde</option>
-                    <option value="evento">🎉 Evento</option>
-                    <option value="dica">📚 Dica</option>
-                    <option value="alimentacao">🍎 Alimentação</option>
-                    <option value="casa">🏡 Casa</option>
-                    <option value="comunidade">🤝 Comunidade</option>
-                </select>
-                <div class="mensagem-erro-campo" id="erro-categoria-publicacao">⚠️ Escolha uma categoria.</div>
-
-            </div>
-
-            <button class="botao-principal" onclick="publicar()">📢 Publicar</button>
-
-            <button class="botao-secundario" onclick="irParaTela('tela-inicio', null)">Cancelar</button>
-        </div>
-
-        <div class="tela-sucesso-publicacao" id="tela-sucesso-publicacao">
-            <div class="icone-sucesso">✅</div>
-            <div class="titulo-sucesso">Publicado com sucesso!</div>
-            <div class="texto-sucesso">Sua publicação já está visível para seus amigos.</div>
-
-            <button class="botao-principal" style="max-width:300px;" onclick="irParaTela('tela-inicio', null)">🏠 Voltar ao Início</button>
-
-            <button class="botao-secundario" onclick="reiniciarFormulario()">✏️ Fazer outra publicação</button>
-        </div>
-    </div>
-
-    <div class="tela" id="tela-mensagens">
-
-        <div class="lista-conversas" id="lista-conversas">
-
-            <div class="item-conversa" onclick="abrirConversa('Graças', 'foto-contato-amarelo', '👩‍🦳')">
-                <div class="foto-contato foto-contato-amarelo">
-                    <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
-                </div>
-                <div class="info-conversa">
-                    <div class="nome-contato">Graças</div>
-
-                    <div class="previa-mensagem nao-lida">Boa tarde</div>
-                </div>
-                <div class="lado-direito-conversa">
-                    <span class="hora-mensagem">14:32</span>
-
-                    <span class="bolinha-nao-lida">1</span>
-                </div>
-            </div>
-
-            <div class="item-conversa" onclick="abrirConversa('Zézin', 'foto-contato-verde', '👴')">
-                <div class="foto-contato foto-contato-verde"><img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"></div>
-                <div class="info-conversa">
-                    <div class="nome-contato">Zézin</div>
-                    <div class="previa-mensagem">Forró hoje cuida</div>
-
-                </div>
-                <div class="lado-direito-conversa">
-                    <span class="hora-mensagem">11:05</span>
-
-                </div>
-            </div>
-
-            <div class="item-conversa" onclick="abrirConversa('Dono Tereza', 'foto-contato-azul', '')">
-                <div class="foto-contato foto-contato-azul"><img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"></div>
-                <div class="info-conversa">
-                    <div class="nome-contato">Dono Tereza</div>
-                    <div class="previa-mensagem nao-lida">Vou te mandar a receita</div>
-                </div>
-                <div class="lado-direito-conversa">
-                    <span class="hora-mensagem">Ontem</span>
-                    <span class="bolinha-nao-lida">1</span>
-                </div>
-            </div>
-
-            <div class="item-conversa" onclick="abrirConversa('Antônio Carlos', 'foto-contato-rosa', '👨‍🦲')">
-                <div class="foto-contato foto-contato-rosa"><img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"></div>
-                <div class="info-conversa">
-                    <div class="nome-contato">Antônio Carlos</div>
-                    <div class="previa-mensagem">Tudo bem por aí?</div>
-                </div>
-                <div class="lado-direito-conversa">
-                    <span class="hora-mensagem">Segunda</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="area-conversa" id="area-conversa">
-
-            <div class="cabecalho-conversa">
-
-                <button class="botao-voltar" onclick="voltarParaLista()">◀</button>
-
-                <div class="foto-contato" id="foto-contato-conversa" style="width:46px; height:46px; font-size:1.4rem;"></div>
-                <div>
-                    <div class="nome-na-conversa" id="nome-na-conversa"></div>
-                    <div class="status-online">● Online</div>
-
-                </div>
-            </div>
-
-            <div class="mensagens-conversa" id="mensagens-conversa"></div>
-
-            <div class="barra-digitar">
-
-                <input class="campo-digitar" id="campo-digitar" type="text" placeholder="Digite sua mensagem...">
-
-                <button class="botao-enviar" onclick="enviarMensagem()">➤</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="tela" id="tela-perfil">
-
-        <div class="cabecalho-perfil">
-            <div class="foto-perfil-grande">
-                <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
-            </div>
-
-            <div class="nome-perfil">Carlos Eduardo</div>
-            <div class="bio-perfil">Aposentado • Amante de música <br>Recife, Pernambuco</div>
-
-        </div>
-
-        <div class="numeros-perfil">
-            <div class="numero-item">
-                <span class="numero-valor">12</span>
-                <span class="numero-rotulo">Publicações</span>
-            </div>
-            <div class="numero-item">
-                <span class="numero-valor">67</span>
-                <span class="numero-rotulo">Amigos</span>
-            </div>
-            <div class="numero-item">
-                <span class="numero-valor">234</span>
-                <span class="numero-rotulo">Curtidas</span>
-            </div>
-        </div>
-
-        <div class="titulo-secao">Minhas Publicações</div>
-
-        <div class="mini-publicacao">
-            <div class="mini-publicacao-corpo">
-                <div class="mini-publicacao-titulo">Fui pescar hoje cedo</div>
-                <div class="mini-publicacao-texto">Acordei às 5h</div>
-            </div>
-            <div class="mini-publicacao-rodape">
-                <span class="mini-publicacao-numero">❤️ 31 curtidas</span>
-                <span class="mini-publicacao-numero">💬 8 comentários</span>
-                <span class="mini-publicacao-numero">🕐 3 dias atrás</span>
-            </div>
-        </div>
-
-        <div class="mini-publicacao">
-            <div class="mini-publicacao-corpo">
-                <div class="mini-publicacao-titulo">Dica de remédio natural</div>
-                <div class="mini-publicacao-texto">Meu médico indicou essa receita de chá</div>
-            </div>
-            <div class="mini-publicacao-rodape">
-                <span class="mini-publicacao-numero">❤️ 45 curtidas</span>
-                <span class="mini-publicacao-numero">💬 14 comentários</span>
-                <span class="mini-publicacao-numero">🕐 1 semana atrás</span>
-            </div>
-        </div>
-
-        <div class="titulo-secao">Configurações</div>
-
-        <div class="opcao-configuracao">
-            <span class="icone-opcao">✏️</span> Editar Perfil
-            <span class="seta-opcao">›</span>
-        </div>
-        <div class="opcao-configuracao">
-            <span class="icone-opcao">🔔</span> Notificações
-            <span class="seta-opcao">›</span>
-        </div>
-        <div class="opcao-configuracao">
-            <span class="icone-opcao">🔒</span> Privacidade
-            <span class="seta-opcao">›</span>
-        </div>
-        <div class="opcao-configuracao">
-            <span class="icone-opcao">🆘</span> Ajuda e Suporte
-            <span class="seta-opcao">›</span>
-        </div>
-
-        <div class="opcao-configuracao" style="color:#c0392b;" onclick="sairDaConta()">
-            <span class="icone-opcao">🚪</span> Sair da Conta
-            <span class="seta-opcao">›</span>
-        </div>
-    </div>
-
-    <nav class="barra-nav" id="barra-nav" style="display:none;">
-
-        <a href="#" class="ativo" onclick="irParaTela('tela-inicio', this)">
-            <span class="icone-nav">🏠</span> Início
-        </a>
-
-        <a href="#" onclick="irParaTela('tela-mensagens', this)">
-            <span class="icone-nav">💬</span> Mensagens
-        </a>
-
-        <a href="#" onclick="irParaTela('tela-perfil', this)">
-            <span class="icone-nav">👤</span> Perfil
-        </a>
-    </nav>
     <script src="scripts/script.js"></script>
 </body>
-
 </html>

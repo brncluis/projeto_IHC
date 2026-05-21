@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aposentela – Perfil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <div class="tela-carregando" id="tela-carregando">
+        <div class="icone-girando"></div>
+        <div class="texto-carregando" id="texto-carregando">Carregando...</div>
+    </div>
+
+    <div class="notificacao" id="notificacao"></div>
+
+    <!-- Modal: Sair da conta -->
+    <div class="fundo-modal" id="modal-sair">
+        <div class="caixa-modal">
+            <div class="modal-titulo">🚪 Sair da conta?</div>
+            <div class="modal-texto">
+                Tem certeza que deseja sair? Você precisará entrar novamente para acessar o Aposentela.
+            </div>
+            <div class="modal-botoes">
+                <button class="botao-fechar-modal" onclick="document.getElementById('modal-sair').classList.remove('aberto')">Cancelar</button>
+                <button class="botao-confirmar-modal" onclick="confirmarSaida()">Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de Topo -->
+    <header class="barra-topo" id="barra-topo">
+        <img src="assets/logo.png" class="barra-topo-logo-img" alt="Logo">
+        <span class="barra-topo-titulo">Meu Perfil</span>
+        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
+    </header>
+
+    <!-- Tela: Perfil -->
+    <div class="tela ativa" id="tela-perfil">
+
+        <div class="cabecalho-perfil">
+            <div class="foto-perfil-grande">
+                <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+            </div>
+            <div class="nome-perfil">Carlos Eduardo</div>
+            <div class="bio-perfil">Aposentado • Amante de música <br>Recife, Pernambuco</div>
+        </div>
+
+        <div class="numeros-perfil">
+            <div class="numero-item">
+                <span class="numero-valor">12</span>
+                <span class="numero-rotulo">Publicações</span>
+            </div>
+            <div class="numero-item">
+                <span class="numero-valor">67</span>
+                <span class="numero-rotulo">Amigos</span>
+            </div>
+            <div class="numero-item">
+                <span class="numero-valor">234</span>
+                <span class="numero-rotulo">Curtidas</span>
+            </div>
+        </div>
+
+        <div class="titulo-secao">Minhas Publicações</div>
+
+        <div class="mini-publicacao">
+            <div class="mini-publicacao-corpo">
+                <div class="mini-publicacao-titulo">Fui pescar hoje cedo</div>
+                <div class="mini-publicacao-texto">Acordei às 5h</div>
+            </div>
+            <div class="mini-publicacao-rodape">
+                <span class="mini-publicacao-numero">❤️ 31 curtidas</span>
+                <span class="mini-publicacao-numero">💬 8 comentários</span>
+                <span class="mini-publicacao-numero">🕐 3 dias atrás</span>
+            </div>
+        </div>
+
+        <div class="mini-publicacao">
+            <div class="mini-publicacao-corpo">
+                <div class="mini-publicacao-titulo">Dica de remédio natural</div>
+                <div class="mini-publicacao-texto">Meu médico indicou essa receita de chá</div>
+            </div>
+            <div class="mini-publicacao-rodape">
+                <span class="mini-publicacao-numero">❤️ 45 curtidas</span>
+                <span class="mini-publicacao-numero">💬 14 comentários</span>
+                <span class="mini-publicacao-numero">🕐 1 semana atrás</span>
+            </div>
+        </div>
+
+        <div class="titulo-secao">Configurações</div>
+
+        <div class="opcao-configuracao">
+            <span class="icone-opcao">✏️</span> Editar Perfil
+            <span class="seta-opcao">›</span>
+        </div>
+        <div class="opcao-configuracao">
+            <span class="icone-opcao">🔔</span> Notificações
+            <span class="seta-opcao">›</span>
+        </div>
+        <div class="opcao-configuracao">
+            <span class="icone-opcao">🔒</span> Privacidade
+            <span class="seta-opcao">›</span>
+        </div>
+        <div class="opcao-configuracao">
+            <span class="icone-opcao">🆘</span> Ajuda e Suporte
+            <span class="seta-opcao">›</span>
+        </div>
+
+        <div class="opcao-configuracao" style="color:#c0392b;" onclick="sairDaConta()">
+            <span class="icone-opcao">🚪</span> Sair da Conta
+            <span class="seta-opcao">›</span>
+        </div>
+
+    </div>
+
+    <!-- Barra de Navegação -->
+    <nav class="barra-nav" id="barra-nav">
+        <a href="inicio.html">
+            <span class="icone-nav">🏠</span> Início
+        </a>
+        <a href="mensagens.html">
+            <span class="icone-nav">💬</span> Mensagens
+        </a>
+        <a href="perfil.html" class="ativo">
+            <span class="icone-nav">👤</span> Perfil
+        </a>
+    </nav>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>
