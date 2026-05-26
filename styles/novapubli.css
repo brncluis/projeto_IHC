@@ -1,0 +1,507 @@
+/* =========================
+   RESET E CONFIGURAÇÕES
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --cor-primaria:#2e8b57;
+    --cor-secundaria:#f4f7f5;
+    --cor-branca:#ffffff;
+    --cor-texto:#2b2b2b;
+    --cor-cinza:#6f6f6f;
+    --cor-borda:#d9e2dc;
+    --cor-sombra:0 4px 14px rgba(0,0,0,0.08);
+    --radius:18px;
+    --transicao:0.25s ease;
+}
+
+body{
+    font-family:'Nunito',sans-serif;
+    background:var(--cor-secundaria);
+    color:var(--cor-texto);
+    padding-bottom:120px;
+    line-height:1.6;
+}
+
+/* =========================
+   LOADING E NOTIFICAÇÃO
+========================= */
+
+.tela-carregando{
+    position:fixed;
+    inset:0;
+    background:rgba(255,255,255,0.92);
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+}
+
+.tela-carregando.ativa{
+    display:flex;
+}
+
+.icone-girando{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    border:6px solid #dcefe3;
+    border-top:6px solid var(--cor-primaria);
+    animation:girar 1s linear infinite;
+}
+
+@keyframes girar{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.texto-carregando{
+    margin-top:18px;
+    font-size:1.1rem;
+    font-weight:800;
+}
+
+.notificacao{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:var(--cor-primaria);
+    color:white;
+    padding:14px 18px;
+    border-radius:12px;
+    font-weight:700;
+    z-index:999;
+    display:none;
+}
+
+.notificacao.visivel{
+    display:block;
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.barra-topo{
+    width:100%;
+    background:white;
+    padding:18px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.barra-topo-logo-img{
+    width:52px;
+    height:52px;
+    object-fit:contain;
+}
+
+.barra-topo-titulo{
+    font-size:1.7rem;
+    font-weight:800;
+    color:var(--cor-primaria);
+}
+
+.campo-pesquisa{
+    border:2px solid var(--cor-borda);
+    border-radius:14px;
+    padding:12px 16px;
+    min-width:240px;
+    font-size:1rem;
+    outline:none;
+}
+
+/* =========================
+   TELA
+========================= */
+
+.tela{
+    width:100%;
+    max-width:850px;
+    margin:0 auto;
+    padding:28px 20px 40px;
+}
+
+/* =========================
+   ORIENTAÇÃO
+========================= */
+
+.rotulo-orientacao{
+    margin-bottom:24px;
+}
+
+.rotulo-orientacao-titulo{
+    font-size:1.8rem;
+    font-weight:800;
+}
+
+.rotulo-orientacao-sub{
+    margin-top:6px;
+    color:var(--cor-cinza);
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.formulario-publicacao{
+    background:white;
+    border-radius:24px;
+    padding:28px;
+    box-shadow:var(--cor-sombra);
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+}
+
+.autor-publicacao{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.foto-autor{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    overflow:hidden;
+    flex-shrink:0;
+}
+
+.nome-autor{
+    font-size:1.15rem;
+    font-weight:800;
+}
+
+.dica-tranquilizadora{
+    background:#eef7f1;
+    color:var(--cor-primaria);
+    padding:16px;
+    border-radius:16px;
+    font-weight:700;
+    line-height:1.6;
+}
+
+.rotulo-campo{
+    display:block;
+    margin-bottom:10px;
+    font-weight:800;
+    font-size:1rem;
+}
+
+.campo-grande{
+    width:100%;
+    min-height:180px;
+    resize:none;
+    border:2px solid var(--cor-borda);
+    border-radius:18px;
+    padding:18px;
+    font-size:1rem;
+    font-family:'Nunito',sans-serif;
+    outline:none;
+    transition:var(--transicao);
+}
+
+.campo-grande:focus{
+    border-color:var(--cor-primaria);
+}
+
+.contador-letras{
+    margin-top:8px;
+    text-align:right;
+    font-size:0.92rem;
+    color:var(--cor-cinza);
+    font-weight:700;
+}
+
+.campo-selecao{
+    width:100%;
+    border:2px solid var(--cor-borda);
+    border-radius:16px;
+    padding:16px;
+    font-size:1rem;
+    outline:none;
+    background:white;
+    transition:var(--transicao);
+}
+
+.campo-selecao:focus{
+    border-color:var(--cor-primaria);
+}
+
+.mensagem-erro-campo{
+    margin-top:8px;
+    color:#d93025;
+    font-weight:700;
+    display:none;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+.botao-principal,
+.botao-secundario{
+    width:100%;
+    border:none;
+    border-radius:18px;
+    padding:18px;
+    font-size:1rem;
+    font-weight:800;
+    cursor:pointer;
+    transition:var(--transicao);
+}
+
+.botao-principal{
+    background:var(--cor-primaria);
+    color:white;
+}
+
+.botao-secundario{
+    background:#ececec;
+    color:var(--cor-texto);
+}
+
+.botao-principal:hover,
+.botao-secundario:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================
+   SUCESSO
+========================= */
+
+.tela-sucesso-publicacao{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    background:white;
+    border-radius:24px;
+    padding:42px 28px;
+    box-shadow:var(--cor-sombra);
+}
+
+.icone-sucesso-grande{
+    font-size:5rem;
+    margin-bottom:18px;
+}
+
+.titulo-sucesso{
+    font-size:2rem;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.caixa-confirmacao{
+    background:#eef7f1;
+    color:var(--cor-primaria);
+    padding:18px;
+    border-radius:18px;
+    font-weight:700;
+    line-height:1.7;
+    margin-bottom:18px;
+    max-width:520px;
+}
+
+.texto-sucesso{
+    color:var(--cor-cinza);
+    margin-bottom:28px;
+    line-height:1.6;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.barra-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    padding:14px 10px;
+    box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+    z-index:999;
+}
+
+.barra-nav a{
+    text-decoration:none;
+    color:var(--cor-cinza);
+    font-weight:800;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+}
+
+.barra-nav a.ativo{
+    color:var(--cor-primaria);
+}
+
+.icone-nav{
+    font-size:1.4rem;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media(max-width:768px){
+
+    .barra-topo{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .campo-pesquisa{
+        width:100%;
+        min-width:0;
+    }
+
+    .formulario-publicacao{
+        padding:22px;
+    }
+
+    .titulo-sucesso{
+        font-size:1.6rem;
+    }
+
+}
+
+/* =========================
+   ACESSIBILIDADE - FONTES
+========================= */
+
+body.fonte-grande{
+    font-size:1.08rem;
+}
+
+body.fonte-muito-grande{
+    font-size:1.18rem;
+}
+
+body.fonte-grande button,
+body.fonte-grande input,
+body.fonte-grande textarea,
+body.fonte-grande select{
+    font-size:1.05rem;
+}
+
+body.fonte-muito-grande button,
+body.fonte-muito-grande input,
+body.fonte-muito-grande textarea,
+body.fonte-muito-grande select{
+    font-size:1.12rem;
+}
+
+/* =========================
+   ALTO CONTRASTE
+========================= */
+
+body.alto-contraste{
+    background:#000;
+    color:#fff;
+}
+
+body.alto-contraste .barra-topo,
+body.alto-contraste .publicacao,
+body.alto-contraste .item-conversa,
+body.alto-contraste .mini-publicacao,
+body.alto-contraste .formulario-publicacao,
+body.alto-contraste .faixa-boas-vindas,
+body.alto-contraste .caixa-modal{
+    background:#111;
+    color:#fff;
+    border:2px solid #fff;
+}
+
+body.alto-contraste .campo-texto,
+body.alto-contraste .campo-pesquisa,
+body.alto-contraste .campo-grande,
+body.alto-contraste .campo-selecao,
+body.alto-contraste .campo-digitar{
+    background:#000;
+    color:#fff;
+    border:2px solid #fff;
+}
+
+body.alto-contraste .barra-nav{
+    background:#111;
+    border-top:2px solid #fff;
+}
+
+body.alto-contraste .barra-nav a{
+    color:#fff;
+}
+
+body.alto-contraste .botao-principal,
+body.alto-contraste .botao-acesso,
+body.alto-contraste .botao-enviar{
+    background:#fff;
+    color:#000;
+}
+
+/* =========================
+   NOTIFICAÇÕES
+========================= */
+
+.notificacao.visivel{
+    display:block;
+    animation:aparecerNotif 0.3s ease;
+}
+
+@keyframes aparecerNotif{
+
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+input,
+textarea,
+select{
+    min-height:54px;
+}
+
+.publicacao,
+.item-conversa,
+.mini-publicacao{
+    margin-bottom:20px;
+}
+
+.acoes-sucesso{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    align-items:center;
+}
+
+.acoes-sucesso .botao-principal,
+.acoes-sucesso .botao-secundario{
+    width:100%;
+    max-width:320px;
+}

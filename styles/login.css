@@ -1,0 +1,488 @@
+:root {
+
+    --cor-verde: #2e7d44;
+    --cor-verde-claro: #4CAF50;
+    --cor-fundo: #f4f1eb;
+    --cor-branco: #ffffff;
+    --cor-texto: #1e1e1e;
+    --cor-cinza: #666;
+    --cor-borda: #ddd;
+    --cor-erro: #c0392b;
+    --cor-erro-fundo: #fdecea;
+    --cor-sucesso-fundo: #e8f5e9;
+
+    --sombra-forte: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+#tela-login {
+
+    width: 100%;
+    max-width: 420px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-logo img {
+
+    width: 100px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.login-nome-app {
+
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--cor-verde);
+
+    margin-bottom: 6px;
+}
+
+.login-subtitulo {
+
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cor-cinza);
+
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.formulario-login {
+
+    width: 100%;
+
+    background-color: var(--cor-branco);
+
+    padding: 28px 24px;
+
+    border-radius: 18px;
+
+    box-shadow: var(--sombra-forte);
+
+    border-top: 5px solid var(--cor-verde);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* =========================
+   CAMPOS
+========================= */
+
+.rotulo-campo {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.campo-texto {
+
+    width: 100%;
+
+    padding: 16px;
+
+    border-radius: 12px;
+    border: 2px solid var(--cor-borda);
+
+    outline: none;
+
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.campo-texto:focus {
+
+    border-color: var(--cor-verde);
+}
+
+.campo-texto.invalido {
+
+    border-color: var(--cor-erro);
+    background-color: var(--cor-erro-fundo);
+}
+
+.mensagem-erro-campo {
+
+    display: none;
+
+    margin-top: 6px;
+
+    font-size: 0.9rem;
+    font-weight: 800;
+
+    color: var(--cor-erro);
+}
+
+.mensagem-erro-campo.visivel {
+
+    display: block;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+.botao-principal {
+
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+    border-radius: 12px;
+
+    background-color: var(--cor-verde);
+    color: white;
+
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.botao-principal:hover {
+
+    opacity: 0.92;
+}
+
+.botao-recuperar-senha {
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--cor-erro);
+    color: white;
+
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.link-esqueci-senha {
+
+    text-align: center;
+
+    font-size: 0.95rem;
+    font-weight: 800;
+
+    color: var(--cor-verde);
+
+    cursor: pointer;
+}
+
+/* =========================
+   ERRO LOGIN
+========================= */
+
+.caixa-erro-login {
+
+    display: none;
+
+    padding: 14px 16px;
+
+    border-radius: 12px;
+
+    background-color: var(--cor-erro-fundo);
+
+    border: 2px solid #e57373;
+
+    color: var(--cor-erro);
+
+    font-size: 0.95rem;
+    font-weight: 800;
+
+    line-height: 1.5;
+}
+
+.caixa-erro-login.visivel {
+
+    display: block;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.fundo-modal {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background-color: rgba(0,0,0,0.45);
+
+    padding: 24px;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 500;
+}
+
+.fundo-modal.aberto {
+
+    display: flex;
+}
+
+.caixa-modal {
+
+    width: 100%;
+    max-width: 380px;
+
+    background-color: white;
+
+    border-radius: 16px;
+
+    padding: 26px 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.modal-titulo {
+
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.modal-texto {
+
+    font-size: 1rem;
+    font-weight: 700;
+
+    color: var(--cor-cinza);
+
+    line-height: 1.6;
+}
+
+.modal-botoes {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 6px;
+}
+
+.botao-fechar-modal,
+.botao-confirmar-modal {
+
+    flex: 1;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.botao-fechar-modal {
+
+    border: 2px solid var(--cor-borda);
+
+    background-color: var(--cor-fundo);
+}
+
+.botao-confirmar-modal {
+
+    border: none;
+
+    background-color: var(--cor-verde);
+
+    color: white;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.tela-carregando {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background-color: rgba(0,0,0,0.35);
+
+    z-index: 999;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.tela-carregando.ativa {
+
+    display: flex;
+}
+
+.icone-girando {
+
+    width: 54px;
+    height: 54px;
+
+    border-radius: 50%;
+
+    border: 6px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+
+    animation: girar 0.8s linear infinite;
+}
+
+.texto-carregando {
+
+    color: white;
+
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+@keyframes girar {
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================
+   NOTIFICAÇÃO
+========================= */
+
+.notificacao {
+
+    position: fixed;
+
+    top: 24px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    font-size: 1rem;
+    font-weight: 800;
+
+    opacity: 0;
+
+    transition: 0.2s;
+
+    z-index: 1000;
+}
+
+.notificacao.visivel {
+
+    opacity: 1;
+}
+
+.notificacao.sucesso {
+
+    background-color: var(--cor-sucesso-fundo);
+
+    color: var(--cor-verde);
+
+    border: 2px solid var(--cor-verde-claro);
+}
+
+.notificacao.erro {
+
+    background-color: var(--cor-erro-fundo);
+
+    color: var(--cor-erro);
+
+    border: 2px solid #e57373;
+}
+
+.login-frase{
+    margin-top:14px;
+    text-align:center;
+    color:var(--cor-cinza);
+    line-height:1.5;
+    font-size:1rem;
+    max-width:320px;
+}
+
+/* =========================
+   NOTIFICAÇÕES
+========================= */
+
+.notificacao.visivel{
+    display:block;
+    animation:aparecerNotif 0.3s ease;
+}
+
+@keyframes aparecerNotif{
+
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
