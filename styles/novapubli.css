@@ -505,3 +505,22 @@ select{
     width:100%;
     max-width:320px;
 }
+
+/* =========================
+   LOGO COMO LINK
+========================= */
+
+.link-logo{
+    display:inline-flex;
+    align-items:center;
+    border-radius:12px;
+    transition:var(--transicao);
+    text-decoration:none;
+}
+
+.link-logo:hover,
+.link-logo:focus-visible{
+    transform:scale(1.06);
+    outline:none;
+    box-shadow:0 0 0 3px rgba(46,139,87,0.25);
+}

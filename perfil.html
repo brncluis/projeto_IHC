@@ -32,9 +32,11 @@
 
     <!-- Barra de Topo -->
     <header class="barra-topo" id="barra-topo">
-        <img src="assets/logo.png" class="barra-topo-logo-img" alt="Logo">
+        <a href="inicio.html" class="link-logo" aria-label="Voltar ao início">
+            <img src="assets/logo.png" class="barra-topo-logo-img" alt="Logo Aposentela">
+        </a>
         <span class="barra-topo-titulo">Meu Perfil</span>
-        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
+        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar nas minhas publicações..." aria-label="Pesquisar minhas publicações">
     </header>
 
     <!-- Tela: Perfil -->
@@ -50,7 +52,7 @@
 
         <div class="numeros-perfil">
             <div class="numero-item">
-                <span class="numero-valor">12</span>
+                <span class="numero-valor">2</span>
                 <span class="numero-rotulo">Publicações</span>
             </div>
             <div class="numero-item">
@@ -91,25 +93,25 @@
 
         <div class="titulo-secao">Configurações</div>
 
-        <div class="opcao-configuracao">
-            <span class="icone-opcao">✏️</span> Editar Perfil
+        <div class="opcao-configuracao" onclick="abrirEditarPerfil()" role="button" tabindex="0">
+            <span><span class="icone-opcao">✏️</span> Editar Perfil</span>
             <span class="seta-opcao">›</span>
         </div>
-        <div class="opcao-configuracao">
-            <span class="icone-opcao">🔔</span> Notificações
+        <div class="opcao-configuracao" onclick="abrirNotificacoes()" role="button" tabindex="0">
+            <span><span class="icone-opcao">🔔</span> Notificações</span>
             <span class="seta-opcao">›</span>
         </div>
-        <div class="opcao-configuracao">
-            <span class="icone-opcao">🔒</span> Privacidade
+        <div class="opcao-configuracao" onclick="abrirPrivacidade()" role="button" tabindex="0">
+            <span><span class="icone-opcao">🔒</span> Privacidade</span>
             <span class="seta-opcao">›</span>
         </div>
-        <div class="opcao-configuracao">
-            <span class="icone-opcao">🆘</span> Ajuda e Suporte
+        <div class="opcao-configuracao" onclick="abrirAjuda()" role="button" tabindex="0">
+            <span><span class="icone-opcao">🆘</span> Ajuda e Suporte</span>
             <span class="seta-opcao">›</span>
         </div>
 
-        <div class="opcao-configuracao" style="color:#c0392b;" onclick="sairDaConta()">
-            <span class="icone-opcao">🚪</span> Sair da Conta
+        <div class="opcao-configuracao opcao-sair" onclick="sairDaConta()" role="button" tabindex="0">
+            <span><span class="icone-opcao">🚪</span> Sair da Conta</span>
             <span class="seta-opcao">›</span>
         </div>
 

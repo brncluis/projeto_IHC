@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aposentela – Início</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-    
+
     <link rel="preload" href="assets/logo.png" as="image">
 
     <link rel="stylesheet" href="styles/inicio.css">
@@ -38,11 +38,13 @@
 
 <header class="barra-topo">
 
-    <img 
-        src="assets/logo.png" 
-        class="barra-topo-logo-img" 
-        alt="Logo"
-    >
+    <a href="inicio.html" class="link-logo" aria-label="Voltar ao início">
+        <img
+            src="assets/logo.png"
+            class="barra-topo-logo-img"
+            alt="Logo Aposentela"
+        >
+    </a>
 
     <span class="barra-topo-titulo">
         Aposentela
@@ -50,15 +52,16 @@
 
     <div class="acoes-topo">
 
-        <input 
-            class="campo-pesquisa" 
-            id="campo-pesquisa" 
-            type="text" 
-            placeholder="🔍 Pesquisar..."
+        <input
+            class="campo-pesquisa"
+            id="campo-pesquisa"
+            type="text"
+            placeholder="🔍 Pesquisar publicações..."
+            aria-label="Pesquisar publicações"
         >
 
-        <button 
-            class="botao-acesso" 
+        <button
+            class="botao-acesso"
             id="btn-fonte"
             onclick="alternarFonteGrande()"
             title="Aumentar tamanho do texto"
@@ -66,8 +69,8 @@
             🔤 Aumentar Tamanho
         </button>
 
-        <button 
-            class="botao-acesso" 
+        <button
+            class="botao-acesso"
             id="btn-contraste"
             onclick="alternarAltoContraste()"
             title="Ativar alto contraste"
@@ -145,11 +148,11 @@
                         <span class="icone-botao">❤️</span>
                         <span class="botao-acao-label contador-curtidas">24 Curtir</span>
                     </button>
-                    <button class="botao-acao">
+                    <button class="botao-acao" onclick="comentar(this)">
                         <span class="icone-botao">💬</span>
                         <span class="botao-acao-label">Comentar</span>
                     </button>
-                    <button class="botao-acao">
+                    <button class="botao-acao" onclick="compartilhar(this)">
                         <span class="icone-botao">↗️</span>
                         <span class="botao-acao-label">Enviar a amigos</span>
                     </button>
@@ -177,11 +180,11 @@
                         <span class="icone-botao">❤️</span>
                         <span class="botao-acao-label contador-curtidas">57 Curtir</span>
                     </button>
-                    <button class="botao-acao">
+                    <button class="botao-acao" onclick="comentar(this)">
                         <span class="icone-botao">💬</span>
                         <span class="botao-acao-label">Comentar</span>
                     </button>
-                    <button class="botao-acao">
+                    <button class="botao-acao" onclick="compartilhar(this)">
                         <span class="icone-botao">↗️</span>
                         <span class="botao-acao-label">Enviar a amigos</span>
                     </button>
@@ -209,11 +212,11 @@
                         <span class="icone-botao">❤️</span>
                         <span class="botao-acao-label contador-curtidas">38 Curtir</span>
                     </button>
-                    <button class="botao-acao">
+                    <button class="botao-acao" onclick="comentar(this)">
                         <span class="icone-botao">💬</span>
                         <span class="botao-acao-label">Comentar</span>
                     </button>
-                    <button class="botao-acao">
+                    <button class="botao-acao" onclick="compartilhar(this)">
                         <span class="icone-botao">↗️</span>
                         <span class="botao-acao-label">Enviar a amigos</span>
                     </button>

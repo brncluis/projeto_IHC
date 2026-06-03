@@ -18,9 +18,11 @@
 
     <!-- Barra de Topo -->
     <header class="barra-topo" id="barra-topo">
-        <img src="assets/logo.png" class="barra-topo-logo-img" alt="Logo">
+        <a href="inicio.html" class="link-logo" aria-label="Voltar ao início">
+            <img src="assets/logo.png" class="barra-topo-logo-img" alt="Logo Aposentela">
+        </a>
         <span class="barra-topo-titulo">Mensagens</span>
-        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar...">
+        <input class="campo-pesquisa" id="campo-pesquisa" type="text" placeholder="🔍 Pesquisar conversas..." aria-label="Pesquisar conversas">
     </header>
 
     <!-- Tela: Mensagens -->
@@ -35,7 +37,7 @@
                 </div>
                 <div class="info-conversa">
                     <div class="nome-contato">Graças</div>
-                    <div class="previa-mensagem nao-lida">Boa tarde</div>
+                    <div class="previa-mensagem nao-lida">🌷 Boa tarde</div>
                 </div>
                 <div class="lado-direito-conversa">
                     <span class="hora-mensagem">14:32</span>
@@ -49,20 +51,20 @@
                 </div>
                 <div class="info-conversa">
                     <div class="nome-contato">Zézin</div>
-                    <div class="previa-mensagem">Forró hoje cuida</div>
+                    <div class="previa-mensagem">🎶 Forró hoje cuida</div>
                 </div>
                 <div class="lado-direito-conversa">
                     <span class="hora-mensagem">11:05</span>
                 </div>
             </div>
 
-            <div class="item-conversa" onclick="abrirConversa('Dona Tereza', 'foto-contato-azul', '')">
+            <div class="item-conversa" onclick="abrirConversa('Dona Tereza', 'foto-contato-azul', '👵')">
                 <div class="foto-contato foto-contato-azul">
                     <img src="https://abwahospital.pk/wp-content/uploads/2025/01/nopic.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
                 </div>
                 <div class="info-conversa">
                     <div class="nome-contato">Dona Tereza</div>
-                    <div class="previa-mensagem nao-lida">Vou te mandar a receita</div>
+                    <div class="previa-mensagem nao-lida">🍲 Vou te mandar a receita</div>
                 </div>
                 <div class="lado-direito-conversa">
                     <span class="hora-mensagem">Ontem</span>
@@ -76,7 +78,7 @@
                 </div>
                 <div class="info-conversa">
                     <div class="nome-contato">Antônio Carlos</div>
-                    <div class="previa-mensagem">Tudo bem por aí?</div>
+                    <div class="previa-mensagem">👋 Tudo bem por aí?</div>
                 </div>
                 <div class="lado-direito-conversa">
                     <span class="hora-mensagem">Segunda</span>
