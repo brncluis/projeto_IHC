@@ -1,3 +1,6 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
 
 *{
     margin:0;
@@ -6,23 +9,35 @@
 }
 
 :root{
-    --cor-primaria:#2e8b57;
-    --cor-secundaria:#f4f7f5;
-    --cor-branca:#ffffff;
-    --cor-texto:#2b2b2b;
-    --cor-cinza:#6f6f6f;
-    --cor-borda:#d9e2dc;
-    --cor-sombra:0 4px 14px rgba(0,0,0,0.08);
-    --radius:18px;
-    --transicao:0.25s ease;
+    --verde:#1f7a4d;
+    --verde-escuro:#155c39;
+    --verde-claro:#e8f3ec;
+
+    --azul-msg:#1f5f8b;
+    --azul-msg-escuro:#17466a;
+
+    --fundo:#eef4f1;
+    --branco:#ffffff;
+    --texto:#1f1f1f;
+    --texto-suave:#555555;
+    --borda:#d6e2dc;
+
+    --sombra:0 4px 14px rgba(0,0,0,0.10);
+
+    --radius-card:22px;
+    --radius-input:16px;
+}
+
+html{
+    font-size:16px;
 }
 
 body{
-    font-family:'Nunito',sans-serif;
-    background:var(--cor-secundaria);
-    color:var(--cor-texto);
-    padding-bottom:130px;
+    font-family:'Nunito', Arial, sans-serif;
+    background:var(--fundo);
+    color:var(--texto);
     line-height:1.6;
+    padding-bottom:110px;
 }
 
 /* =========================
@@ -32,10 +47,9 @@ body{
 .tela-carregando{
     position:fixed;
     inset:0;
-    background:rgba(255,255,255,0.92);
+    background:rgba(255,255,255,0.95);
 
     display:none;
-
     flex-direction:column;
     align-items:center;
     justify-content:center;
@@ -50,9 +64,11 @@ body{
 .icone-girando{
     width:60px;
     height:60px;
+
     border-radius:50%;
-    border:6px solid #dcefe3;
-    border-top:6px solid var(--cor-primaria);
+    border:6px solid #d8eadf;
+    border-top-color:var(--verde);
+
     animation:girar 1s linear infinite;
 }
 
@@ -63,9 +79,36 @@ body{
 }
 
 .texto-carregando{
-    margin-top:18px;
-    font-size:1.1rem;
+    margin-top:16px;
+    font-size:1.15rem;
     font-weight:800;
+}
+
+/* =========================
+   NOTIFICAÇÃO
+========================= */
+
+.notificacao{
+    display:none;
+    position:fixed;
+    top:90px;
+    left:50%;
+    transform:translateX(-50%);
+
+    background:var(--verde-escuro);
+    color:white;
+
+    padding:14px 22px;
+    border-radius:14px;
+
+    font-weight:800;
+    box-shadow:var(--sombra);
+
+    z-index:1000;
+}
+
+.notificacao.visivel{
+    display:block;
 }
 
 /* =========================
@@ -74,56 +117,76 @@ body{
 
 .barra-topo{
     width:100%;
-    background:white;
-    padding:18px 24px;
+    background:var(--branco);
+
+    padding:18px 28px;
 
     display:flex;
     align-items:center;
     gap:18px;
 
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    box-shadow:0 2px 12px rgba(0,0,0,0.08);
 
     position:sticky;
     top:0;
     z-index:100;
 }
 
+.link-logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+    text-decoration:none;
+}
+
 .barra-topo-logo-img{
-    width:52px;
-    height:52px;
+    width:54px;
+    height:54px;
     object-fit:contain;
 }
 
 .barra-topo-titulo{
-    font-size:1.6rem;
-    font-weight:800;
-    color:var(--cor-primaria);
+    font-size:1.75rem;
+    font-weight:900;
+    color:var(--verde-escuro);
 }
 
 .campo-pesquisa{
     margin-left:auto;
 
-    border:2px solid var(--cor-borda);
-    border-radius:14px;
+    width:290px;
+    min-height:54px;
 
-    padding:12px 16px;
+    border:2px solid var(--borda);
+    border-radius:var(--radius-input);
 
-    min-width:240px;
+    padding:0 18px;
+
+    font-size:1.05rem;
+    font-weight:700;
 
     outline:none;
+    background:white;
+    color:var(--texto);
+}
 
-    font-size:1rem;
+.campo-pesquisa:focus{
+    border-color:var(--verde);
+    box-shadow:0 0 0 4px rgba(31,122,77,0.18);
 }
 
 /* =========================
-   TELA
+   CONTAINER PRINCIPAL
 ========================= */
 
 .tela{
     width:100%;
-    max-width:950px;
+    max-width:920px;
+
     margin:0 auto;
-    padding:24px 18px;
+    padding:28px 18px;
 }
 
 /* =========================
@@ -133,13 +196,16 @@ body{
 .lista-conversas{
     display:flex;
     flex-direction:column;
-    gap:16px;
+    gap:28px;
 }
 
 .item-conversa{
-    background:white;
+    margin-bottom:0;
+    width:100%;
 
-    border-radius:22px;
+    background:var(--branco);
+    border:1px solid var(--borda);
+    border-radius:var(--radius-card);
 
     padding:18px;
 
@@ -148,44 +214,69 @@ body{
     gap:16px;
 
     cursor:pointer;
+    box-shadow:var(--sombra);
 
-    box-shadow:var(--cor-sombra);
-
-    transition:var(--transicao);
+    transition:0.2s ease;
 }
 
 .item-conversa:hover{
     transform:translateY(-2px);
+    border-color:var(--verde);
+}
+
+.item-conversa:active{
+    transform:scale(0.99);
 }
 
 .foto-contato{
-    width:64px;
-    height:64px;
+    width:66px;
+    height:66px;
 
     border-radius:50%;
-
     overflow:hidden;
 
     flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--verde-claro);
+}
+
+.foto-contato img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
 }
 
 .info-conversa{
     flex:1;
+    min-width:0;
 }
 
 .nome-contato{
-    font-size:1.08rem;
-    font-weight:800;
+    font-size:1.18rem;
+    font-weight:900;
+    color:var(--texto);
 }
 
 .previa-mensagem{
     margin-top:4px;
-    color:var(--cor-cinza);
+
+    font-size:1.02rem;
+    font-weight:700;
+    color:var(--texto-suave);
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .previa-mensagem.nao-lida{
-    color:var(--cor-texto);
-    font-weight:800;
+    color:var(--texto);
+    font-weight:900;
 }
 
 .lado-direito-conversa{
@@ -193,32 +284,37 @@ body{
     flex-direction:column;
     align-items:flex-end;
     gap:8px;
+
+    flex-shrink:0;
 }
 
 .hora-mensagem{
-    font-size:0.88rem;
-    color:var(--cor-cinza);
+    font-size:0.95rem;
+    font-weight:800;
+    color:var(--texto-suave);
 }
 
 .bolinha-nao-lida{
-    background:var(--cor-primaria);
+    min-width:28px;
+    height:28px;
+
+    padding:0 8px;
+
+    border-radius:999px;
+
+    background:var(--verde-escuro);
     color:white;
-
-    width:24px;
-    height:24px;
-
-    border-radius:50%;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    font-size:0.8rem;
-    font-weight:800;
+    font-size:0.9rem;
+    font-weight:900;
 }
 
 /* =========================
-   CONVERSA
+   ÁREA DA CONVERSA
 ========================= */
 
 .area-conversa{
@@ -227,126 +323,169 @@ body{
 
     height:75vh;
 
-    background:white;
+    background:var(--branco);
 
     border-radius:24px;
-
     overflow:hidden;
 
-    box-shadow:var(--cor-sombra);
+    box-shadow:var(--sombra);
+    border:1px solid var(--borda);
 }
 
 .cabecalho-conversa{
-    padding:18px;
+    min-height:82px;
 
-    border-bottom:1px solid #ececec;
+    padding:16px 18px;
 
     display:flex;
     align-items:center;
     gap:14px;
+
+    background:var(--verde-escuro);
+    color:white;
 }
 
 .botao-voltar{
+    width:48px;
+    height:48px;
+
     border:none;
-    background:#eef4f1;
+    border-radius:14px;
 
-    width:42px;
-    height:42px;
+    background:white;
+    color:var(--verde-escuro);
 
-    border-radius:12px;
+    font-size:1.2rem;
+    font-weight:900;
 
     cursor:pointer;
-
-    font-size:1rem;
-    font-weight:800;
 }
 
 .nome-na-conversa{
-    font-weight:800;
-    font-size:1.1rem;
+    font-size:1.18rem;
+    font-weight:900;
 }
 
 .status-online{
     margin-top:2px;
-    color:var(--cor-primaria);
-    font-size:0.92rem;
-    font-weight:700;
+
+    font-size:0.95rem;
+    font-weight:800;
+    color:#d9ffe8;
 }
+
+/* =========================
+   MENSAGENS
+========================= */
 
 .mensagens-conversa{
     flex:1;
 
-    padding:20px;
-
-    overflow-y:auto;
+    padding:22px;
 
     display:flex;
     flex-direction:column;
     gap:14px;
 
-    background:#f7faf8;
+    overflow-y:auto;
+
+    background:#e5eee9;
 }
 
 .balao-mensagem{
-    max-width:75%;
+    max-width:78%;
 
-    padding:14px 18px;
+    padding:15px 18px;
 
     border-radius:18px;
 
+    font-size:1.08rem;
+    font-weight:800;
     line-height:1.5;
 
-    font-weight:700;
+    word-wrap:break-word;
+    box-shadow:0 2px 8px rgba(0,0,0,0.12);
 }
 
+/* mensagem recebida: mais escura e visível */
 .balao-mensagem.recebida{
-    background:white;
     align-self:flex-start;
+
+    background:#ffffff;
+    color:#1b1b1b;
+
+    border:2px solid #b7c9bf;
+
+    border-bottom-left-radius:6px;
 }
 
+/* mensagem enviada: cor forte de mensagem */
 .balao-mensagem.enviada{
-    background:var(--cor-primaria);
-    color:white;
     align-self:flex-end;
+
+    background:var(--azul-msg);
+    color:white;
+
+    border:2px solid var(--azul-msg-escuro);
+
+    border-bottom-right-radius:6px;
 }
+
+/* =========================
+   BARRA DE DIGITAR
+========================= */
 
 .barra-digitar{
     padding:16px;
 
-    border-top:1px solid #ececec;
-
     display:flex;
     gap:12px;
+
+    background:white;
+    border-top:1px solid var(--borda);
 }
 
 .campo-digitar{
     flex:1;
 
-    border:2px solid var(--cor-borda);
+    min-height:58px;
 
-    border-radius:16px;
+    border:2px solid var(--borda);
+    border-radius:var(--radius-input);
 
-    padding:14px 16px;
+    padding:0 18px;
+
+    font-size:1.08rem;
+    font-weight:700;
 
     outline:none;
+    color:var(--texto);
+}
 
-    font-size:1rem;
+.campo-digitar:focus{
+    border-color:var(--verde);
+    box-shadow:0 0 0 4px rgba(31,122,77,0.18);
 }
 
 .botao-enviar{
-    border:none;
+    width:64px;
+    min-width:64px;
+    height:58px;
 
-    background:var(--cor-primaria);
+    border:none;
+    border-radius:var(--radius-input);
+
+    background:var(--verde-escuro);
     color:white;
 
-    width:58px;
-
-    border-radius:16px;
+    font-size:1.35rem;
+    font-weight:900;
 
     cursor:pointer;
+}
 
-    font-size:1.1rem;
-    font-weight:800;
+.botao-enviar:hover{
+    background:var(--verde);
 }
 
 /* =========================
@@ -364,96 +503,74 @@ body{
 
     display:flex;
     justify-content:space-around;
+    gap:18px;
 
-    padding:14px 10px;
+    padding:12px 10px 16px;
 
-    box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+    box-shadow:0 -3px 14px rgba(0,0,0,0.12);
 
     z-index:999;
 }
 
 .barra-nav a{
+    min-width:105px;
+    min-height:64px;
+
     text-decoration:none;
 
-    color:var(--cor-cinza);
+    color:var(--texto-suave);
 
-    font-weight:800;
+    font-size:0.98rem;
+    font-weight:900;
 
     display:flex;
     flex-direction:column;
     align-items:center;
-
+    justify-content:center;
     gap:4px;
+
+    border-radius:18px;
+
+    transition:0.2s ease;
+}
+
+.barra-nav a:hover{
+    background:var(--verde-claro);
+    color:var(--verde-escuro);
 }
 
 .barra-nav a.ativo{
-    color:var(--cor-primaria);
+    background:var(--verde-escuro);
+    color:white;
 }
 
 .icone-nav{
-    font-size:1.4rem;
+    font-size:1.45rem;
 }
 
 /* =========================
-   RESPONSIVO
+   ACESSIBILIDADE
 ========================= */
 
-@media(max-width:768px){
-
-    .barra-topo{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .campo-pesquisa{
-        width:100%;
-        min-width:0;
-        margin-left:0;
-    }
-
-    .item-conversa{
-        padding:16px;
-    }
-
-    .foto-contato{
-        width:58px;
-        height:58px;
-    }
-
-    .area-conversa{
-        height:78vh;
-    }
-
-    .balao-mensagem{
-        max-width:88%;
-    }
-
+button,
+input,
+a{
+    font-family:inherit;
 }
 
-/* =========================
-   ACESSIBILIDADE - FONTES
-========================= */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible{
+    outline:4px solid rgba(31,122,77,0.35);
+    outline-offset:3px;
+}
 
 body.fonte-grande{
-    font-size:1.08rem;
+    font-size:1.1rem;
 }
 
 body.fonte-muito-grande{
-    font-size:1.18rem;
-}
-
-body.fonte-grande button,
-body.fonte-grande input,
-body.fonte-grande textarea,
-body.fonte-grande select{
-    font-size:1.05rem;
-}
-
-body.fonte-muito-grande button,
-body.fonte-muito-grande input,
-body.fonte-muito-grande textarea,
-body.fonte-muito-grande select{
-    font-size:1.12rem;
+    font-size:1.2rem;
 }
 
 /* =========================
@@ -466,93 +583,186 @@ body.alto-contraste{
 }
 
 body.alto-contraste .barra-topo,
-body.alto-contraste .publicacao,
 body.alto-contraste .item-conversa,
-body.alto-contraste .mini-publicacao,
-body.alto-contraste .formulario-publicacao,
-body.alto-contraste .faixa-boas-vindas,
-body.alto-contraste .caixa-modal{
+body.alto-contraste .area-conversa,
+body.alto-contraste .barra-digitar,
+body.alto-contraste .barra-nav{
     background:#111;
     color:#fff;
     border:2px solid #fff;
 }
 
-body.alto-contraste .campo-texto,
+body.alto-contraste .mensagens-conversa{
+    background:#000;
+}
+
+body.alto-contraste .cabecalho-conversa{
+    background:#000;
+    border-bottom:2px solid #fff;
+}
+
 body.alto-contraste .campo-pesquisa,
-body.alto-contraste .campo-grande,
-body.alto-contraste .campo-selecao,
 body.alto-contraste .campo-digitar{
     background:#000;
     color:#fff;
     border:2px solid #fff;
 }
 
-body.alto-contraste .barra-nav{
+body.alto-contraste .balao-mensagem.recebida{
     background:#111;
-    border-top:2px solid #fff;
+    color:#fff;
+    border:2px solid #fff;
+}
+
+body.alto-contraste .balao-mensagem.enviada{
+    background:#fff;
+    color:#000;
+    border:2px solid #fff;
 }
 
 body.alto-contraste .barra-nav a{
     color:#fff;
 }
 
-body.alto-contraste .botao-principal,
-body.alto-contraste .botao-acesso,
-body.alto-contraste .botao-enviar{
+body.alto-contraste .barra-nav a.ativo{
     background:#fff;
     color:#000;
 }
 
 /* =========================
-   NOTIFICAÇÕES
+   RESPONSIVIDADE
 ========================= */
 
-.notificacao.visivel{
-    display:block;
-    animation:aparecerNotif 0.3s ease;
-}
+@media(max-width:768px){
 
-@keyframes aparecerNotif{
-
-    from{
-        opacity:0;
-        transform:translateY(-10px);
+    body{
+        padding-bottom:105px;
     }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
+    .barra-topo{
+        padding:16px;
+        flex-wrap:wrap;
     }
 
+    .barra-topo-titulo{
+        font-size:1.5rem;
+    }
+
+    .campo-pesquisa{
+        width:100%;
+        margin-left:0;
+    }
+
+    .tela{
+        padding:20px 14px;
+    }
+
+    .item-conversa{
+        padding:16px;
+        gap:14px;
+    }
+
+    .foto-contato{
+        width:60px;
+        height:60px;
+    }
+
+    .nome-contato{
+        font-size:1.1rem;
+    }
+
+    .previa-mensagem{
+        font-size:0.98rem;
+    }
+
+    .area-conversa{
+        height:76vh;
+        border-radius:20px;
+    }
+
+    .mensagens-conversa{
+        padding:16px;
+    }
+
+    .balao-mensagem{
+        max-width:88%;
+        font-size:1.02rem;
+    }
+
+    .barra-nav{
+        justify-content:space-around;
+        gap:6px;
+    }
+
+    .barra-nav a{
+        min-width:80px;
+        min-height:60px;
+        font-size:0.9rem;
+    }
 }
 
-input,
-textarea,
-select{
-    min-height:54px;
+@media(max-width:480px){
+
+    .barra-topo-logo-img{
+        width:48px;
+        height:48px;
+    }
+
+    .item-conversa{
+        align-items:center;
+    }
+
+    .foto-contato{
+        width:56px;
+        height:56px;
+    }
+
+    .lado-direito-conversa{
+        gap:6px;
+    }
+
+    .hora-mensagem{
+        font-size:0.82rem;
+    }
+
+    .bolinha-nao-lida{
+        min-width:25px;
+        height:25px;
+        font-size:0.8rem;
+    }
+
+    .barra-digitar{
+        padding:12px;
+        gap:8px;
+    }
+
+    .campo-digitar{
+        min-height:54px;
+        font-size:1rem;
+    }
+
+    .botao-enviar{
+        width:56px;
+        min-width:56px;
+        height:54px;
+    }
+
+    .barra-nav a{
+        min-width:68px;
+        font-size:0.82rem;
+    }
 }
 
-.publicacao,
-.item-conversa,
-.mini-publicacao{
-    margin-bottom:20px;
+
+.lista-conversas{
+    display:flex;
+    flex-direction:column;
 }
 
-/* =========================
-   LOGO COMO LINK
-========================= */
-
-.link-logo{
-    display:inline-flex;
-    align-items:center;
-    border-radius:12px;
-    transition:var(--transicao);
-    text-decoration:none;
+.lista-conversas > .item-conversa{
+    margin-bottom:28px !important;
 }
 
-.link-logo:hover,
-.link-logo:focus-visible{
-    transform:scale(1.06);
-    outline:none;
-    box-shadow:0 0 0 3px rgba(46,139,87,0.25);
+.lista-conversas > .item-conversa:last-child{
+    margin-bottom:0 !important;
 }
